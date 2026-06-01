@@ -73,14 +73,21 @@ const eventId = params.eventId as string;
   }
 
   async function setCurrent(performanceId: string) {
-    await supabase.from('events').update({
+  const { error } = await supabase
+    .from('events')
+    .update({
       current_performance_id: performanceId,
       is_voting_open: false
-    }).eq('id', eventId);
+    })
+    .eq('id', eventId);
 
-    await supabase.from('performances').update({ status: 'current' }).eq('id', performanceId);
-    loadAll();
+  if (error) {
+    alert(error.message);
+    return;
   }
+
+  await loadAll();
+}
 
   async function toggleVoting(open: boolean) {
     await supabase.from('events').update({ is_voting_open: open }).eq('id', eventId);
