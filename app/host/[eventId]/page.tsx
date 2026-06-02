@@ -145,7 +145,38 @@ export default function HostPage() {
 
     await loadAll();
   }
+async function nextSinger() {
+  const completedId = event?.current_performance_id;
 
+  if (completedId) {
+    await supabase
+      .from('performances')
+      .update({ status: 'completed' })
+      .eq('id', completedId);
+  }
+
+  const next = rotatedQueue.find((p) => p.id !== completedId && p.status !== 'completed');
+
+  if (!next) {
+    alert('No more singers in the queue.');
+    return;
+  }
+
+  const { error } = await supabase
+    .from('events')
+    .update({
+      current_performance_id: next.id,
+      is_voting_open: true
+    })
+    .eq('id', eventId);
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  await loadAll();
+}
   async function toggleVoting(open: boolean) {
     const { error } = await supabase
       .from('events')
