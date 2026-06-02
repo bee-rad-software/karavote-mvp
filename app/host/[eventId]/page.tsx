@@ -494,6 +494,31 @@ const fairQueue = useMemo(() => {
           </div>
         ))}
       </div>
+   <div
+  style={{
+    marginTop: 40,
+    display: 'flex',
+    justifyContent: 'center',
+    gap: 40,
+    alignItems: 'center',
+    borderTop: '1px solid rgba(255,255,255,0.15)',
+    paddingTop: 20
+  }}
+>
+  <div style={{ textAlign: 'center' }}>
+    {signupUrl && <QRCodeSVG value={signupUrl} size={60} />}
+    <div style={{ color: '#38bdf8', fontSize: 12 }}>
+      Signup
+    </div>
+  </div>
+
+  <div style={{ textAlign: 'center' }}>
+    {voteUrl && <QRCodeSVG value={voteUrl} size={60} />}
+    <div style={{ color: '#c2410c', fontSize: 12 }}>
+      Vote
+    </div>
+  </div>
+</div>
     </main>
   );
 }
