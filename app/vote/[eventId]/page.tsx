@@ -37,7 +37,10 @@ export default function VotePage() {
   async function load() {
     const { data: ev } = await supabase.from('events').select('*').eq('id', eventId).single();
     setEvent(ev);
-
+    
+    console.log('Vote page event:', ev);
+    console.log('Current performance id:', ev?.current_performance_id);
+    
     if (ev?.current_performance_id) {
       const { data: perf } = await supabase
         .from('performances')
