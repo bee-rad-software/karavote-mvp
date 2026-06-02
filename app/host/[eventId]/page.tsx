@@ -301,11 +301,12 @@ const fairQueue = useMemo(() => {
     Open on a TV or projector
   </p>
 
-  <Link href={`/display/${eventId}`}>
-    <button className="secondary">
-      Launch TV Display
-    </button>
-  </Link>
+  <button
+  className="secondary"
+  onClick={() => window.open(`/display/${eventId}`, '_blank')}
+>
+  Launch TV Display
+</button>
 </div>
         <div className="card">
           <h2>Now singing</h2>
