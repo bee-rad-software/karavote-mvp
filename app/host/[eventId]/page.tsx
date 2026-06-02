@@ -311,6 +311,7 @@ const fairQueue = useMemo(() => {
                 </span>
               </p>
               <div className="row">
+              <button onClick={nextSinger}>Next Singer</button>
                 <button onClick={() => toggleVoting(true)}>Open Voting</button>
                 <button className="danger" onClick={() => toggleVoting(false)}>
                   Close Voting
