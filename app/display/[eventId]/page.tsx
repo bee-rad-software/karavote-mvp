@@ -1,5 +1,6 @@
 'use client';
 
+import { QRCodeSVG } from 'qrcode.react';
 import { useEffect, useMemo, useState } from 'react';
 import { supabase, EventRow, PerformanceRow, VoteRow } from '@/lib/supabase';
 import { useParams } from 'next/navigation';
@@ -12,6 +13,16 @@ export default function DisplayPage() {
   const [performances, setPerformances] = useState<PerformanceRow[]>([]);
   const [votes, setVotes] = useState<VoteRow[]>([]);
 
+  const voteUrl =
+  typeof window !== 'undefined'
+    ? `${window.location.origin}/vote/${eventId}`
+    : '';
+
+const signupUrl =
+  typeof window !== 'undefined'
+    ? `${window.location.origin}/signup/${eventId}`
+    : '';
+  
   useEffect(() => {
     loadAll();
 
@@ -78,6 +89,19 @@ export default function DisplayPage() {
 
   return (
     <main className="container">
+     <div style={{ position: 'fixed', top: 20, left: 20, textAlign: 'center' }}>
+  <div style={{ background: 'white', padding: 12, borderRadius: 12 }}>
+    {signupUrl && <QRCodeSVG value={signupUrl} size={150} />}
+  </div>
+  <p style={{ fontSize: 20, fontWeight: 'bold' }}>Singer Signup</p>
+</div>
+
+<div style={{ position: 'fixed', top: 20, right: 20, textAlign: 'center' }}>
+  <div style={{ background: 'white', padding: 12, borderRadius: 12 }}>
+    {voteUrl && <QRCodeSVG value={voteUrl} size={150} />}
+  </div>
+  <p style={{ fontSize: 20, fontWeight: 'bold' }}>Audience Vote</p>
+</div>
       <div className="card">
         <h1 style={{ fontSize: '64px', textAlign: 'center' }}>
           🎤 NOW SINGING
