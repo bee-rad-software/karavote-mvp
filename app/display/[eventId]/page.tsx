@@ -88,7 +88,6 @@ const signupUrl =
   }, [performances, votes]);
 
   return (
-   return (
   <main
     style={{
       minHeight: '100vh',
