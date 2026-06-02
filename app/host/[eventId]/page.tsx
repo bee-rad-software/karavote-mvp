@@ -376,31 +376,7 @@ const fairQueue = useMemo(() => {
   </div>
 </div>
       <div className="grid">
-        <div className="card">
-          <h2 style={{ color: '#38bdf8' }}>
-  🎟 Audience Voting
-</h2>
-          <div className="qr-box">
-            {voteUrl && <QRCodeSVG value={voteUrl} size={220} />}
-          </div>
-          <p className="small">{voteUrl}</p>
-          <Link href={`/vote/${eventId}`}>
-            <button className="secondary">Open Voting Page</button>
-          </Link>
-        </div>
-
-        <div className="card">
-         <h2 style={{ color: '#38bdf8' }}>
-  🎤 Singer Signup
-</h2>
-          <div className="qr-box">
-            {signupUrl && <QRCodeSVG value={signupUrl} size={220} />}
-          </div>
-          <p className="small">{signupUrl}</p>
-          <Link href={`/signup/${eventId}`}>
-            <button className="secondary">Open Signup Page</button>
-          </Link>
-        </div>
+       
 <div className="card">
  <h2 style={{ color: '#38bdf8' }}>
   TV Display
