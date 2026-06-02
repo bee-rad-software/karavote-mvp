@@ -250,7 +250,9 @@ const fairQueue = useMemo(() => {
     .sort((a, b) => a.round - b.round || a.firstOrder - b.firstOrder);
 }, [performances]);
  const upNext = rotatedQueue.find(
-  (p) => p.id !== event?.current_performance_id && p.status !== 'completed'
+  p =>
+    p.id !== event?.current_performance_id &&
+    p.status !== 'completed'
 );
   const leaderboard = useMemo(() => {
     return performances
@@ -471,7 +473,9 @@ const fairQueue = useMemo(() => {
         <h2 style={{ color: '#38bdf8' }}>
   📋 Queue
 </h2>
-        {rotatedQueue.map((p) => (
+        {rotatedQueue
+  .filter((p) => p.status !== 'completed')
+  .map((p) => (
           <div className="leaderboard-row" key={p.id}>
             <div>
              <strong>
