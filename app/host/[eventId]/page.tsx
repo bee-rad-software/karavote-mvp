@@ -268,7 +268,9 @@ const fairQueue = useMemo(() => {
     <main
   className="container"
   style={{
-    maxWidth: 1400,
+    background: '#0f172a',
+    minHeight: '100vh',
+    color: 'white',
     padding: 32
   }}
 >
@@ -295,7 +297,7 @@ const fairQueue = useMemo(() => {
     style={{
       padding: '10px 18px',
       borderRadius: 999,
-      background: event?.is_voting_open ? '#16a34a' : '#6b7280',
+     background: event?.is_voting_open ? '#38bdf8' : '#c2410c',
       color: 'white',
       fontWeight: 800
     }}
@@ -303,9 +305,45 @@ const fairQueue = useMemo(() => {
     {event?.is_voting_open ? 'Voting Open' : 'Voting Closed'}
   </div>
 </div>
+     <div className="card">
+  <h2 style={{ color: '#38bdf8' }}>⚡ Quick Actions</h2>
+
+  <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+    <button
+      className="secondary"
+      onClick={() => window.open(`/display/${eventId}`, '_blank')}
+    >
+      📺 Launch TV Display
+    </button>
+
+    <button
+      onClick={() => toggleVoting(true)}
+      style={{
+        background: '#38bdf8',
+        color: '#0f172a',
+        fontWeight: 'bold'
+      }}
+    >
+      Open Voting
+    </button>
+
+    <button
+      onClick={() => toggleVoting(false)}
+      style={{
+        background: '#c2410c',
+        color: 'white',
+        fontWeight: 'bold'
+      }}
+    >
+      Close Voting
+    </button>
+  </div>
+</div>
       <div className="grid">
         <div className="card">
-          <h2>Audience voting link</h2>
+          <h2 style={{ color: '#38bdf8' }}>
+  🎟 Audience Voting
+</h2>
           <div className="qr-box">
             {voteUrl && <QRCodeSVG value={voteUrl} size={220} />}
           </div>
@@ -316,7 +354,9 @@ const fairQueue = useMemo(() => {
         </div>
 
         <div className="card">
-          <h2>Singer signup link</h2>
+         <h2 style={{ color: '#38bdf8' }}>
+  🎤 Singer Signup
+</h2>
           <div className="qr-box">
             {signupUrl && <QRCodeSVG value={signupUrl} size={220} />}
           </div>
@@ -326,7 +366,9 @@ const fairQueue = useMemo(() => {
           </Link>
         </div>
 <div className="card">
-  <h2>TV Display</h2>
+ <h2 style={{ color: '#38bdf8' }}>
+  TV Display
+</h2>
 
   <p className="small">
     Open on a TV or projector
@@ -340,10 +382,26 @@ const fairQueue = useMemo(() => {
 </button>
 </div>
         <div className="card">
-          <h2>Now singing</h2>
+          <h2
+  style={{
+    color: '#c2410c',
+    fontSize: 32,
+    marginBottom: 16
+  }}
+>
+  🎙 NOW SINGING
+</h2>
           {current ? (
             <>
-              <h3>{current.singer_name}</h3>
+              <h3
+  style={{
+    fontSize: 48,
+    color: '#38bdf8',
+    marginBottom: 8
+  }}
+>
+  {current.singer_name}
+</h3>
               <p>
                 {current.song_title}
                 {current.artist ? ` by ${current.artist}` : ''}
@@ -369,7 +427,9 @@ const fairQueue = useMemo(() => {
       </div>
 
       <div className="card">
-        <h2>Add singer</h2>
+        <h2 style={{ color: '#38bdf8' }}>
+  🎤 Singer Signup
+</h2>
         <label>Singer name</label>
         <input value={singerName} onChange={(e) => setSingerName(e.target.value)} />
 
@@ -383,7 +443,9 @@ const fairQueue = useMemo(() => {
       </div>
 
       <div className="card">
-        <h2>Queue</h2>
+        <h2 style={{ color: '#38bdf8' }}>
+  📋 Queue
+</h2>
         {rotatedQueue.map((p) => (
           <div className="leaderboard-row" key={p.id}>
             <div>
@@ -403,7 +465,9 @@ const fairQueue = useMemo(() => {
       </div>
 
       <div className="card">
-        <h2>Leaderboard</h2>
+        <h2 style={{ color: '#38bdf8' }}>
+  🏆 Leaderboard
+</h2>
         {leaderboard.map((p, index) => (
           <div className="leaderboard-row" key={p.id}>
             <div>
