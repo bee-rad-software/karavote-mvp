@@ -88,74 +88,155 @@ const signupUrl =
   }, [performances, votes]);
 
   return (
-    <main className="container">
-     <div style={{ position: 'fixed', top: 20, left: 20, textAlign: 'center' }}>
-  <div style={{ background: 'white', padding: 12, borderRadius: 12 }}>
-    {signupUrl && <QRCodeSVG value={signupUrl} size={150} />}
-  </div>
-  <p style={{ fontSize: 20, fontWeight: 'bold' }}>Singer Signup</p>
-</div>
+   return (
+  <main
+    style={{
+      minHeight: '100vh',
+      background: 'linear-gradient(135deg, #050510 0%, #111827 45%, #312e81 100%)',
+      color: 'white',
+      padding: '32px',
+      fontFamily: 'Arial, sans-serif',
+      position: 'relative',
+      overflow: 'hidden'
+    }}
+  >
+    <div style={{ position: 'fixed', bottom: 24, left: 24, textAlign: 'center' }}>
+      <div style={{ background: 'white', padding: 10, borderRadius: 14 }}>
+        {signupUrl && <QRCodeSVG value={signupUrl} size={125} />}
+      </div>
+      <div style={{ marginTop: 8, fontSize: 20, fontWeight: 900 }}>SIGN UP</div>
+    </div>
 
-<div style={{ position: 'fixed', top: 20, right: 20, textAlign: 'center' }}>
-  <div style={{ background: 'white', padding: 12, borderRadius: 12 }}>
-    {voteUrl && <QRCodeSVG value={voteUrl} size={150} />}
-  </div>
-  <p style={{ fontSize: 20, fontWeight: 'bold' }}>Audience Vote</p>
-</div>
-      <div className="card">
-        <h1 style={{ fontSize: '64px', textAlign: 'center' }}>
-          🎤 NOW SINGING
-        </h1>
+    <div style={{ position: 'fixed', bottom: 24, right: 24, textAlign: 'center' }}>
+      <div style={{ background: 'white', padding: 10, borderRadius: 14 }}>
+        {voteUrl && <QRCodeSVG value={voteUrl} size={125} />}
+      </div>
+      <div style={{ marginTop: 8, fontSize: 20, fontWeight: 900 }}>VOTE</div>
+    </div>
 
-        {current ? (
-          <>
-            <h2 style={{ fontSize: '72px', textAlign: 'center' }}>
-              {current.singer_name}
-            </h2>
+    <header style={{ textAlign: 'center', marginBottom: 24 }}>
+      <div style={{ fontSize: 26, letterSpacing: 5, color: '#facc15', fontWeight: 900 }}>
+        KARAOKE CONTEST LIVE
+      </div>
+      <div style={{ fontSize: 22, opacity: 0.75 }}>
+        {event?.name}{event?.venue ? ` • ${event.venue}` : ''}
+      </div>
+    </header>
 
-            <p style={{ fontSize: '44px', textAlign: 'center' }}>
-              {current.song_title}
-              {current.artist ? ` by ${current.artist}` : ''}
-            </p>
+    <section
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr 2fr 1fr',
+        gap: 24,
+        alignItems: 'stretch'
+      }}
+    >
+      <div
+        style={{
+          background: 'rgba(255,255,255,0.08)',
+          border: '1px solid rgba(255,255,255,0.15)',
+          borderRadius: 24,
+          padding: 24
+        }}
+      >
+        <h2 style={{ fontSize: 34, marginTop: 0 }}>🏆 Top Scores</h2>
 
-            <p style={{ fontSize: '32px', textAlign: 'center' }}>
-              Voting is {event?.is_voting_open ? 'OPEN ⭐' : 'CLOSED'}
-            </p>
-          </>
+        {leaderboard.length > 0 ? (
+          leaderboard.slice(0, 5).map((p, index) => (
+            <div
+              key={p.id}
+              style={{
+                padding: '16px 0',
+                borderBottom: '1px solid rgba(255,255,255,0.15)'
+              }}
+            >
+              <div style={{ fontSize: 28, fontWeight: 900 }}>
+                {index + 1}. {p.singer_name}
+              </div>
+              <div style={{ fontSize: 24, color: '#facc15', fontWeight: 900 }}>
+                {p.avg.toFixed(2)} ⭐
+              </div>
+            </div>
+          ))
         ) : (
-          <h2 style={{ textAlign: 'center' }}>Waiting for first singer...</h2>
+          <p style={{ fontSize: 26 }}>No votes yet.</p>
         )}
       </div>
 
-      <div className="grid">
-        <div className="card">
-          <h2>⏭ Up Next</h2>
-          {upcoming.length > 0 ? (
-            upcoming.map((p, index) => (
-              <div className="leaderboard-row" key={p.id}>
-                <strong>{index + 1}. {p.singer_name}</strong>
-                <span>{p.song_title}</span>
-              </div>
-            ))
-          ) : (
-            <p>No singers waiting.</p>
-          )}
+      <div
+        style={{
+          background: 'rgba(0,0,0,0.35)',
+          border: '2px solid rgba(250,204,21,0.5)',
+          borderRadius: 32,
+          padding: 40,
+          textAlign: 'center',
+          boxShadow: '0 0 60px rgba(250,204,21,0.15)'
+        }}
+      >
+        <div style={{ fontSize: 40, color: '#facc15', fontWeight: 900, letterSpacing: 4 }}>
+          🎤 NOW SINGING
         </div>
 
-        <div className="card">
-          <h2>🏆 Top Scores</h2>
-          {leaderboard.length > 0 ? (
-            leaderboard.map((p, index) => (
-              <div className="leaderboard-row" key={p.id}>
-                <strong>{index + 1}. {p.singer_name}</strong>
-                <span>{p.avg.toFixed(2)} ⭐</span>
-              </div>
-            ))
-          ) : (
-            <p>No votes yet.</p>
-          )}
-        </div>
+        {current ? (
+          <>
+            <h1 style={{ fontSize: 92, margin: '28px 0 10px', textTransform: 'uppercase' }}>
+              {current.singer_name}
+            </h1>
+
+            <div style={{ fontSize: 44, opacity: 0.95 }}>
+              {current.song_title}
+              {current.artist ? ` by ${current.artist}` : ''}
+            </div>
+
+            <div
+              style={{
+                marginTop: 34,
+                display: 'inline-block',
+                padding: '14px 34px',
+                borderRadius: 999,
+                background: event?.is_voting_open ? '#16a34a' : '#6b7280',
+                fontSize: 30,
+                fontWeight: 900
+              }}
+            >
+              {event?.is_voting_open ? 'VOTING OPEN' : 'VOTING CLOSED'}
+            </div>
+          </>
+        ) : (
+          <h1 style={{ fontSize: 60 }}>Waiting for first singer...</h1>
+        )}
       </div>
-    </main>
-  );
+
+      <div
+        style={{
+          background: 'rgba(255,255,255,0.08)',
+          border: '1px solid rgba(255,255,255,0.15)',
+          borderRadius: 24,
+          padding: 24
+        }}
+      >
+        <h2 style={{ fontSize: 34, marginTop: 0 }}>⏭ Up Next</h2>
+
+        {upcoming.length > 0 ? (
+          upcoming.slice(0, 5).map((p, index) => (
+            <div
+              key={p.id}
+              style={{
+                padding: '16px 0',
+                borderBottom: '1px solid rgba(255,255,255,0.15)'
+              }}
+            >
+              <div style={{ fontSize: 28, fontWeight: 900 }}>
+                {index + 1}. {p.singer_name}
+              </div>
+              <div style={{ fontSize: 22, opacity: 0.75 }}>{p.song_title}</div>
+            </div>
+          ))
+        ) : (
+          <p style={{ fontSize: 26 }}>No singers waiting.</p>
+        )}
+      </div>
+    </section>
+  </main>
+);
 }
