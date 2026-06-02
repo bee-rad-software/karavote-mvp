@@ -249,6 +249,9 @@ const fairQueue = useMemo(() => {
     })
     .sort((a, b) => a.round - b.round || a.firstOrder - b.firstOrder);
 }, [performances]);
+ const upNext = rotatedQueue.find(
+  (p) => p.id !== event?.current_performance_id && p.status !== 'completed'
+);
   const leaderboard = useMemo(() => {
     return performances
       .map((p) => {
@@ -409,6 +412,31 @@ const fairQueue = useMemo(() => {
                   {event?.is_voting_open ? 'Open' : 'Closed'}
                 </span>
               </p>
+              <div
+  style={{
+    marginTop: 24,
+    padding: 18,
+    borderRadius: 16,
+    background: 'rgba(56,189,248,0.12)',
+    border: '1px solid rgba(56,189,248,0.35)'
+  }}
+>
+  <h3 style={{ color: '#38bdf8', marginTop: 0 }}>⏭ Up Next</h3>
+
+  {upNext ? (
+    <>
+      <div style={{ fontSize: 28, fontWeight: 900 }}>
+        {upNext.singer_name}
+      </div>
+      <div className="small">
+        {upNext.song_title}
+        {upNext.artist ? ` by ${upNext.artist}` : ''}
+      </div>
+    </>
+  ) : (
+    <p>No one waiting.</p>
+  )}
+</div>
               <div className="row">
               <button onClick={nextSinger}>Next Singer</button>
                 <button onClick={() => toggleVoting(true)}>Open Voting</button>
