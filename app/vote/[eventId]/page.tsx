@@ -17,7 +17,6 @@ function getVoterKey() {
 export default function VotePage() {
   const params = useParams();
   const eventId = params.eventId as string;
-  const eventId = params.eventId;
   const [event, setEvent] = useState<EventRow | null>(null);
   const [current, setCurrent] = useState<PerformanceRow | null>(null);
   const [message, setMessage] = useState('');
