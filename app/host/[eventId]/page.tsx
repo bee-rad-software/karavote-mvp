@@ -194,7 +194,30 @@ export default function HostPage() {
       return a.singerFirstOrder - b.singerFirstOrder;
     });
   }, [performances]);
+const fairQueue = useMemo(() => {
+  const sorted = [...performances].sort((a, b) => a.queue_order - b.queue_order);
+  const singerCounts = new Map<string, number>();
+  const firstSeen = new Map<string, number>();
 
+  return sorted
+    .map((p) => {
+      const singer = p.singer_name.trim().toLowerCase();
+
+      if (!firstSeen.has(singer)) {
+        firstSeen.set(singer, p.queue_order);
+      }
+
+      const round = (singerCounts.get(singer) || 0) + 1;
+      singerCounts.set(singer, round);
+
+      return {
+        ...p,
+        round,
+        firstOrder: firstSeen.get(singer) || p.queue_order
+      };
+    })
+    .sort((a, b) => a.round - b.round || a.firstOrder - b.firstOrder);
+}, [performances]);
   const leaderboard = useMemo(() => {
     return performances
       .map((p) => {
