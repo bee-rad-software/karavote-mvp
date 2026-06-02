@@ -294,7 +294,19 @@ const fairQueue = useMemo(() => {
             <button className="secondary">Open Signup Page</button>
           </Link>
         </div>
+<div className="card">
+  <h2>TV Display</h2>
 
+  <p className="small">
+    Open on a TV or projector
+  </p>
+
+  <Link href={`/display/${eventId}`}>
+    <button className="secondary">
+      Launch TV Display
+    </button>
+  </Link>
+</div>
         <div className="card">
           <h2>Now singing</h2>
           {current ? (
