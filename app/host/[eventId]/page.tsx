@@ -792,11 +792,21 @@ const singerGroups = activeQueue.reduce((groups, p) => {
       </div>
 
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-        <button onClick={() => setCurrent(p.id)}>Make Current</button>
-        <button onClick={() => moveSinger(p.id, 'up')}>↑ Up</button>
-        <button onClick={() => moveSinger(p.id, 'down')}>↓ Down</button>
-        <button onClick={() => skipSinger(p.id)}>Skip</button>
-        <button onClick={() => removeSinger(p.id)}>Remove</button>
+       {editingId === p.id ? (
+  <>
+    <button onClick={() => saveEdit(p.id)}>Save</button>
+    <button onClick={cancelEditing}>Cancel</button>
+  </>
+) : (
+  <>
+    <button onClick={() => setCurrent(p.id)}>Make Current</button>
+    <button onClick={() => moveSinger(p.id, 'up')}>↑ Up</button>
+    <button onClick={() => moveSinger(p.id, 'down')}>↓ Down</button>
+    <button onClick={() => skipSinger(p.id)}>Skip</button>
+    <button onClick={() => removeSinger(p.id)}>Remove</button>
+    <button onClick={() => startEditing(p)}>Edit</button>
+  </>
+)}
       </div>
     </div>
   ))
