@@ -19,6 +19,19 @@ export default function SignupPage() {
   ]);
   const [message, setMessage] = useState('');
 
+ function getDeviceId() {
+  if (typeof window === 'undefined') return '';
+
+  let id = window.localStorage.getItem('karavote_device_id');
+
+  if (!id) {
+    id = crypto.randomUUID();
+    window.localStorage.setItem('karavote_device_id', id);
+  }
+
+  return id;
+}
+  
   function updateSong(index: number, field: keyof SongEntry, value: string) {
     const updated = [...songs];
     updated[index][field] = value;
