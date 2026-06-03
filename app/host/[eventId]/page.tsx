@@ -213,6 +213,45 @@ async function newShow() {
 
   await loadAll();
 }
+
+  function startEditing(p: PerformanceRow) {
+  setEditingId(p.id);
+  setEditSingerName(p.singer_name);
+  setEditSongTitle(p.song_title);
+  setEditArtist(p.artist || '');
+}
+
+function cancelEditing() {
+  setEditingId(null);
+  setEditSingerName('');
+  setEditSongTitle('');
+  setEditArtist('');
+}
+
+async function saveEdit(performanceId: string) {
+  if (!editSingerName.trim() || !editSongTitle.trim()) {
+    alert('Singer name and song title are required.');
+    return;
+  }
+
+  const { error } = await supabase
+    .from('performances')
+    .update({
+      singer_name: editSingerName.trim(),
+      song_title: editSongTitle.trim(),
+      artist: editArtist.trim()
+    })
+    .eq('id', performanceId);
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  cancelEditing();
+  await loadAll();
+}
+  
   async function removeSinger(performanceId: string) {
   if (!confirm('Remove this singer from the queue?')) return;
 
