@@ -17,6 +17,10 @@ export default function HostPage() {
   const [songTitle, setSongTitle] = useState('');
   const [artist, setArtist] = useState('');
   const [singerView, setSingerView] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
+const [editSingerName, setEditSingerName] = useState('');
+const [editSongTitle, setEditSongTitle] = useState('');
+const [editArtist, setEditArtist] = useState('');
 
   const voteUrl =
     typeof window !== 'undefined'
