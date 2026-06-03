@@ -416,6 +416,15 @@ const fairQueue = useMemo(() => {
     }))
     .sort((a, b) => b.averageScore - a.averageScore);
 }, [performances, votes]);
+ 
+  const singers = Array.from(
+  new Set(
+    rotatedQueue
+      .filter((p) => p.status !== 'completed')
+      .map((p) => p.singer_name)
+  )
+);
+  
   return (
     <main
   className="container"
