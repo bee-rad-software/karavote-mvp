@@ -80,12 +80,13 @@ const { data: existing } = await supabase
 const startingOrder = (existing?.length || 0) + 1;
 
     const rows = validSongs.map((song, index) => ({
-      event_id: eventId,
-      singer_name: singerName.trim(),
-      song_title: song.songTitle.trim(),
-      artist: song.artist.trim(),
-      queue_order: startingOrder + index
-    }));
+  event_id: eventId,
+  singer_name: singerName.trim(),
+  song_title: song.songTitle.trim(),
+  artist: song.artist.trim(),
+  queue_order: startingOrder + index,
+  device_id: deviceId
+}));
 
     const { error } = await supabase.from('performances').insert(rows);
 
