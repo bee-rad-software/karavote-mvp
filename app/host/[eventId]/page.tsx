@@ -16,7 +16,6 @@ export default function HostPage() {
   const [singerName, setSingerName] = useState('');
   const [songTitle, setSongTitle] = useState('');
   const [artist, setArtist] = useState('');
-  const [queueView, setQueueView] = useState<'rotation' | 'singer'>('rotation');
 
   const voteUrl =
     typeof window !== 'undefined'
@@ -416,22 +415,6 @@ const fairQueue = useMemo(() => {
     }))
     .sort((a, b) => b.averageScore - a.averageScore);
 }, [performances, votes]);
- 
-  const activeRotatedQueue = rotatedQueue.filter(
-  (p) => p.status !== 'completed' && p.status !== 'skipped'
-);
-
-const queueBySinger = activeRotatedQueue.reduce((groups, p) => {
-  const key = p.singer_name.trim();
-
-  if (!groups[key]) {
-    groups[key] = [];
-  }
-
-  groups[key].push(p);
-  return groups;
-}, {} as Record<string, typeof activeRotatedQueue>);
-  
   return (
     <main
   className="container"
@@ -668,76 +651,45 @@ const queueBySinger = activeRotatedQueue.reduce((groups, p) => {
         <h2 style={{ color: '#38bdf8' }}>
   📋 Queue
 </h2>
-        <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-  <button
-    className={queueView === 'rotation' ? '' : 'secondary'}
-    onClick={() => setQueueView('rotation')}
-  >
-    Rotation View
+        {rotatedQueue
+  .filter((p) => p.status !== 'completed')
+  .map((p) => (
+         <div className="leaderboard-row" key={p.singer_name}>
+            <div>
+             <strong>
+  {p.singer_name} (Song #{p.songNumber})
+</strong>
+              <div className="small">
+                {p.song_title}
+                {p.artist ? ` by ${p.artist}` : ''}
+              </div>
+            </div>
+            <div style={{ display: 'flex', gap: 8 }}>
+  <button onClick={() => setCurrent(p.id)}>
+    Make Current
   </button>
 
-  <button
-    className={queueView === 'singer' ? '' : 'secondary'}
-    onClick={() => setQueueView('singer')}
-  >
-    Singer View
+  <button className="secondary" onClick={() => moveSinger(p.id, 'up')}>
+  ↑ Up
+</button>
+
+<button className="secondary" onClick={() => moveSinger(p.id, 'down')}>
+  ↓ Down
+</button>
+              
+  <button onClick={() => skipSinger(p.id)}>
+    Skip
+  </button>
+
+  <button onClick={() => removeSinger(p.id)}>
+    Remove
   </button>
 </div>
-     {queueView === 'rotation' ? (
-  activeRotatedQueue.map((p) => (
-    <div className="leaderboard-row" key={p.id}>
-      <div>
-        <strong>
-          {p.singer_name} (Song #{p.songNumber})
-        </strong>
-        <div className="small">
-          {p.song_title}
-          {p.artist ? ` by ${p.artist}` : ''}
-        </div>
-      </div>
-
-      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-        <button className="secondary" onClick={() => setCurrent(p.id)}>Make Current</button>
-        <button className="secondary" onClick={() => moveSinger(p.id, 'up')}>↑ Up</button>
-        <button className="secondary" onClick={() => moveSinger(p.id, 'down')}>↓ Down</button>
-        <button className="secondary" onClick={() => skipSinger(p.id)}>Skip</button>
-        <button className="danger" onClick={() => removeSinger(p.id)}>Remove</button>
-      </div>
-    </div>
-  ))
-) : (
-  Object.entries(queueBySinger).map(([singer, songs]) => (
-    <div className="leaderboard-row" key={singer}>
-      <div style={{ width: '100%' }}>
-        <strong style={{ fontSize: 22, color: '#38bdf8' }}>{singer}</strong>
-
-        {songs.map((p) => (
-          <div
-            key={p.id}
-            style={{
-              marginTop: 10,
-              paddingLeft: 14,
-              borderLeft: '3px solid #c2410c'
-            }}
-          >
-            <div className="small">
-              {p.song_title}
-              {p.artist ? ` by ${p.artist}` : ''}
-            </div>
-
-            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 8 }}>
-              <button className="secondary" onClick={() => setCurrent(p.id)}>Make Current</button>
-              <button className="secondary" onClick={() => skipSinger(p.id)}>Skip</button>
-              <button className="danger" onClick={() => removeSinger(p.id)}>Remove</button>
-            </div>
           </div>
         ))}
       </div>
-    </div>
-  ))
-)}
 
- <div className="card">
+  <div className="card">
   <h2 style={{ color: '#38bdf8' }}>✅ Completed Tonight</h2>
 
   {performances.filter((p) => p.status === 'completed').length > 0 ? (
@@ -757,25 +709,28 @@ const queueBySinger = activeRotatedQueue.reduce((groups, p) => {
   ) : (
     <p className="small">No completed songs yet.</p>
   )}
+</div>    
+      
+      <div className="card">
+        <h2 style={{ color: '#38bdf8' }}>
+  🏆 Leaderboard
+</h2>
+        {leaderboard.map((p, index) => (
+          <div className="leaderboard-row" key={p.singer_name}>
+          <div>
+  <strong>
+    #{index + 1} {p.singer_name}
+  </strong>
 </div>
 
-<div className="card">
-  <h2 style={{ color: '#38bdf8' }}>🏆 Leaderboard</h2>
-
-  {leaderboard.map((p, index) => (
-    <div className="leaderboard-row" key={p.singer_name}>
-      <div>
-        <strong>
-          #{index + 1} {p.singer_name}
-        </strong>
+<div>
+  {p.averageScore.toFixed(2)} ⭐
+</div>
+     
+          </div>
+        ))}
       </div>
-
-      <div>{p.averageScore.toFixed(2)} ⭐</div>
-    </div>
-  ))}
-</div>
-
-<div
+   <div
   style={{
     marginTop: 40,
     display: 'flex',
@@ -788,14 +743,18 @@ const queueBySinger = activeRotatedQueue.reduce((groups, p) => {
 >
   <div style={{ textAlign: 'center' }}>
     {signupUrl && <QRCodeSVG value={signupUrl} size={60} />}
-    <div style={{ color: '#38bdf8', fontSize: 12 }}>Signup</div>
+    <div style={{ color: '#38bdf8', fontSize: 12 }}>
+      Signup
+    </div>
   </div>
 
   <div style={{ textAlign: 'center' }}>
     {voteUrl && <QRCodeSVG value={voteUrl} size={60} />}
-    <div style={{ color: '#c2410c', fontSize: 12 }}>Vote</div>
+    <div style={{ color: '#c2410c', fontSize: 12 }}>
+      Vote
+    </div>
   </div>
 </div>
-</main>
-);
-
+    </main>
+  );
+}
