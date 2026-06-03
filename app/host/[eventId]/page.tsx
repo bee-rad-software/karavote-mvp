@@ -656,7 +656,7 @@ const fairQueue = useMemo(() => {
   🏆 Leaderboard
 </h2>
         {leaderboard.map((p, index) => (
-          <div className="leaderboard-row" key={p.id}>
+          <div className="leaderboard-row" key={p.singer_name}>
           <div>
   <strong>
     #{index + 1} {p.singer_name}
