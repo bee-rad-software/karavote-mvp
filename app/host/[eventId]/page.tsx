@@ -594,7 +594,7 @@ const fairQueue = useMemo(() => {
         {rotatedQueue
   .filter((p) => p.status !== 'completed')
   .map((p) => (
-          <div className="leaderboard-row" key={p.id}>
+         <div className="leaderboard-row" key={p.singer_name}>
             <div>
              <strong>
   {p.singer_name} (Song #{p.songNumber})
