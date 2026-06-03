@@ -90,7 +90,7 @@ if (existingVote) {
 const { error } = await supabase
   .from('votes')
   .insert({
-    performance_id: currentPerformance.id,
+    performance_id: current.id,
     voter_key: voterKey,
     score,
     device_id: deviceId,
