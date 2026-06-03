@@ -65,19 +65,7 @@ export default function VotePage() {
     }
   }
 
-  async function vote(score: number) {
-    setMessage('');
-    if (!event?.is_voting_open || !current) {
-      setMessage('Voting is closed right now.');
-      return;
-    }
-
-    const voterKey = getVoterKey();
-    const deviceId = getDeviceId();
-
-const voterKey = getVoterKey();
-const deviceId = getDeviceId();
-
+  const voterKey = getVoterKey();
 const deviceId = getDeviceId();
 
 const existingVoteResponse = await supabase
@@ -90,9 +78,19 @@ const existingVoteResponse = await supabase
 const existingVote = existingVoteResponse.data;
 
 if (existingVote) {
-  alert('You have already voted for this performance.');
+  setMessage('You have already voted for this performance.');
   return;
 }
+
+const { error } = await supabase
+  .from('votes')
+  .insert({
+    event_id: eventId,
+    performance_id: current.id,
+    voter_key: voterKey,
+    score,
+    device_id: deviceId,
+  });
 
 const { error } = await supabase
   .from('votes')
