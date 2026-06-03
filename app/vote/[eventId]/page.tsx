@@ -64,55 +64,46 @@ export default function VotePage() {
       setCurrent(null);
     }
   }
+async function vote(score: number) {
+  setMessage('');
+
+  if (!event?.is_voting_open || !current) {
+    setMessage('Voting is closed right now.');
+    return;
+  }
 
   const voterKey = getVoterKey();
-const deviceId = getDeviceId();
+  const deviceId = getDeviceId();
 
-const existingVoteResponse = await supabase
-  .from('votes')
-  .select('id')
-  .eq('performance_id', current.id)
-  .eq('device_id', deviceId)
-  .maybeSingle();
+  const { data: existingVote } = await supabase
+    .from('votes')
+    .select('id')
+    .eq('performance_id', current.id)
+    .eq('device_id', deviceId)
+    .maybeSingle();
 
-const existingVote = existingVoteResponse.data;
-
-if (existingVote) {
-  setMessage('You have already voted for this performance.');
-  return;
-}
-
-const { error } = await supabase
-  .from('votes')
-  .insert({
-    event_id: eventId,
-    performance_id: current.id,
-    voter_key: voterKey,
-    score,
-    device_id: deviceId,
-  });
-
-const { error } = await supabase
-  .from('votes')
-  .insert({
-    event_id: eventId,
-    performance_id: current.id,
-    voter_key: voterKey,
-    score,
-    device_id: deviceId,
-  });
-
-    if (error) {
-      if (error.message.includes('duplicate')) {
-        setMessage('You already voted for this singer.');
-      } else {
-        setMessage(error.message);
-      }
-      return;
-    }
-
-    setMessage(`Thanks. Your ${score}-star vote was counted.`);
+  if (existingVote) {
+    setMessage('You have already voted for this performance.');
+    return;
   }
+
+  const { error } = await supabase
+    .from('votes')
+    .insert({
+      event_id: eventId,
+      performance_id: current.id,
+      voter_key: voterKey,
+      score,
+      device_id: deviceId,
+    });
+
+  if (error) {
+    setMessage(error.message);
+    return;
+  }
+
+  setMessage(`Thanks. Your ${score}-star vote was counted.`);
+}
 
   return (
     <main className="container">
