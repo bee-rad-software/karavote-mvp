@@ -551,9 +551,19 @@ const fairQueue = useMemo(() => {
                 {p.artist ? ` by ${p.artist}` : ''}
               </div>
             </div>
-            <button className="secondary" onClick={() => setCurrent(p.id)}>
-              Make Current
-            </button>
+            <div style={{ display: 'flex', gap: 8 }}>
+  <button onClick={() => setCurrent(p.id)}>
+    Make Current
+  </button>
+
+  <button onClick={() => skipSinger(p.id)}>
+    Skip
+  </button>
+
+  <button onClick={() => removeSinger(p.id)}>
+    Remove
+  </button>
+</div>
           </div>
         ))}
       </div>
