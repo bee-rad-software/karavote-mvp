@@ -757,14 +757,38 @@ const singerGroups = activeQueue.reduce((groups, p) => {
   activeQueue.map((p) => (
     <div className="leaderboard-row" key={p.id}>
       <div>
-        <strong>
-          {p.singer_name} (Song #{p.songNumber})
-        </strong>
+        {editingId === p.id ? (
+  <div style={{ width: '100%' }}>
+    <label>Singer name</label>
+    <input
+      value={editSingerName}
+      onChange={(e) => setEditSingerName(e.target.value)}
+    />
 
-        <div className="small">
-          {p.song_title}
-          {p.artist ? ` by ${p.artist}` : ''}
-        </div>
+    <label>Song title</label>
+    <input
+      value={editSongTitle}
+      onChange={(e) => setEditSongTitle(e.target.value)}
+    />
+
+    <label>Artist</label>
+    <input
+      value={editArtist}
+      onChange={(e) => setEditArtist(e.target.value)}
+    />
+  </div>
+) : (
+  <div>
+    <strong>
+      {p.singer_name} (Song #{p.songNumber})
+    </strong>
+
+    <div className="small">
+      {p.song_title}
+      {p.artist ? ` by ${p.artist}` : ''}
+    </div>
+  </div>
+)}
       </div>
 
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
