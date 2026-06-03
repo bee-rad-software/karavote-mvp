@@ -77,6 +77,7 @@ export default function VotePage() {
       performance_id: current.id,
       voter_key: voterKey,
       score
+      device_id: getDeviceId(),
     });
 
     if (error) {
