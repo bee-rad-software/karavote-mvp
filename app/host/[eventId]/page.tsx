@@ -580,6 +580,14 @@ const fairQueue = useMemo(() => {
     Make Current
   </button>
 
+  <button className="secondary" onClick={() => moveSinger(p.id, 'up')}>
+  ↑ Up
+</button>
+
+<button className="secondary" onClick={() => moveSinger(p.id, 'down')}>
+  ↓ Down
+</button>
+              
   <button onClick={() => skipSinger(p.id)}>
     Skip
   </button>
