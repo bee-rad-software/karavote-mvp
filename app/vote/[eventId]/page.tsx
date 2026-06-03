@@ -74,12 +74,13 @@ export default function VotePage() {
     const voterKey = getVoterKey();
     const deviceId = getDeviceId();
 
-const { data: existingVote } = await supabase
-  .from('votes')
-  .select('id')
-  .eq('performance_id', currentPerformance.id)
-  .eq('device_id', deviceId)
-  .maybeSingle();
+ const voterKey = getVoterKey();
+    const { error } = await supabase.from('votes').insert({
+      event_id: eventId,
+      performance_id: current.id,
+      voter_key: voterKey,
+      score,
+      device_id: getDeviceId()
 
 if (existingVote) {
   alert('You have already voted for this performance.');
