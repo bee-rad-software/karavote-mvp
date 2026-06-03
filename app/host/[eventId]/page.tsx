@@ -737,7 +737,7 @@ const queueBySinger = activeRotatedQueue.reduce((groups, p) => {
   ))
 )}
 
-  <div className="card">
+ <div className="card">
   <h2 style={{ color: '#38bdf8' }}>✅ Completed Tonight</h2>
 
   {performances.filter((p) => p.status === 'completed').length > 0 ? (
@@ -757,12 +757,10 @@ const queueBySinger = activeRotatedQueue.reduce((groups, p) => {
   ) : (
     <p className="small">No completed songs yet.</p>
   )}
-</div>    
-      
-     <div className="card">
-  <h2 style={{ color: '#38bdf8' }}>
-    🏆 Leaderboard
-  </h2>
+</div>
+
+<div className="card">
+  <h2 style={{ color: '#38bdf8' }}>🏆 Leaderboard</h2>
 
   {leaderboard.map((p, index) => (
     <div className="leaderboard-row" key={p.singer_name}>
@@ -772,13 +770,12 @@ const queueBySinger = activeRotatedQueue.reduce((groups, p) => {
         </strong>
       </div>
 
-      <div>
-        {p.averageScore.toFixed(2)} ⭐
-      </div>
+      <div>{p.averageScore.toFixed(2)} ⭐</div>
     </div>
   ))}
 </div>
-   <div
+
+<div
   style={{
     marginTop: 40,
     display: 'flex',
@@ -791,18 +788,14 @@ const queueBySinger = activeRotatedQueue.reduce((groups, p) => {
 >
   <div style={{ textAlign: 'center' }}>
     {signupUrl && <QRCodeSVG value={signupUrl} size={60} />}
-    <div style={{ color: '#38bdf8', fontSize: 12 }}>
-      Signup
-    </div>
+    <div style={{ color: '#38bdf8', fontSize: 12 }}>Signup</div>
   </div>
 
   <div style={{ textAlign: 'center' }}>
     {voteUrl && <QRCodeSVG value={voteUrl} size={60} />}
-    <div style={{ color: '#c2410c', fontSize: 12 }}>
-      Vote
-    </div>
+    <div style={{ color: '#c2410c', fontSize: 12 }}>Vote</div>
   </div>
 </div>
-    </main>
-  );
-      }
+</main>
+);
+}
