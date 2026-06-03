@@ -144,6 +144,45 @@ const upcoming = rotatedQueue
     .slice(0, 5);
 }, [performances, votes]);
 
+  if (event?.is_show_ended) {
+  return (
+    <main
+      style={{
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #0f172a 0%, #312e81 100%)',
+        color: 'white',
+        padding: 40,
+        textAlign: 'center',
+        fontFamily: 'Arial, sans-serif'
+      }}
+    >
+      <h1 style={{ fontSize: 72, color: '#facc15' }}>🏆 Awards Night</h1>
+
+      {leaderboard[0] && (
+        <div style={{ fontSize: 80, fontWeight: 900, marginTop: 40 }}>
+          🥇 {leaderboard[0].singer_name}
+        </div>
+      )}
+
+      {leaderboard[1] && (
+        <div style={{ fontSize: 52, marginTop: 30 }}>
+          🥈 {leaderboard[1].singer_name}
+        </div>
+      )}
+
+      {leaderboard[2] && (
+        <div style={{ fontSize: 44, marginTop: 20 }}>
+          🥉 {leaderboard[2].singer_name}
+        </div>
+      )}
+
+      <p style={{ fontSize: 32, marginTop: 40 }}>
+        Thanks for singing!
+      </p>
+    </main>
+  );
+}
+  
   return (
   <main
     style={{
