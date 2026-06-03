@@ -73,6 +73,25 @@ export default function HostPage() {
     setEvent(data);
   }
 
+  async function endShow() {
+  if (!confirm('End the show and show awards?')) return;
+
+  const { error } = await supabase
+    .from('events')
+    .update({
+      is_voting_open: false,
+      is_show_ended: true
+    })
+    .eq('id', eventId);
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  await loadAll();
+}
+  
   async function loadPerformances() {
     const { data, error } = await supabase
       .from('performances')
@@ -496,6 +515,17 @@ const fairQueue = useMemo(() => {
     >
       Close Voting
     </button>
+
+    <button
+  onClick={endShow}
+  style={{
+    background: '#c2410c',
+    color: 'white',
+    fontWeight: 'bold'
+  }}
+>
+  🏁 End Show
+</button>
   </div>
 </div>
       <div className="grid">
