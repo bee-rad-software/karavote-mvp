@@ -170,6 +170,36 @@ async function startShow() {
 
   await loadAll();
 }
+  async function removeSinger(performanceId: string) {
+  if (!confirm('Remove this singer from the queue?')) return;
+
+  const { error } = await supabase
+    .from('performances')
+    .update({ status: 'completed' })
+    .eq('id', performanceId);
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  await loadAll();
+}
+
+async function skipSinger(performanceId: string) {
+  const { error } = await supabase
+    .from('performances')
+    .update({ status: 'skipped' })
+    .eq('id', performanceId);
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  await loadAll();
+}
+
   async function nextSinger() {
   const completedId = event?.current_performance_id;
 
