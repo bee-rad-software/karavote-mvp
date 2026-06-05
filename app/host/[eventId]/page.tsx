@@ -35,6 +35,11 @@ const [peoplesChoiceResults, setPeoplesChoiceResults] = useState<
       ? `${window.location.origin}/signup/${eventId}`
       : '';
 
+  const peoplesChoiceUrl =
+  typeof window !== 'undefined'
+    ? `${window.location.origin}/peopleschoice/${eventId}`
+    : '';
+
   useEffect(() => {
     loadAll();
 
