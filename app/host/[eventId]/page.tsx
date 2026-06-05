@@ -890,7 +890,32 @@ const singerGroups = activeQueue.reduce((groups, p) => {
           </div>
         ))}
       </div>
-   <div
+   
+      <div className="card">
+  <h2 style={{ color: '#c2410c' }}>
+    🎉 People's Choice
+  </h2>
+
+  {peoplesChoiceResults.length === 0 ? (
+    <p className="small">No votes yet.</p>
+  ) : (
+    peoplesChoiceResults.map((row, index) => (
+      <div className="leaderboard-row" key={row.singer_name}>
+        <div>
+          <strong>
+            #{index + 1} {row.singer_name}
+          </strong>
+        </div>
+
+        <div>
+          {row.votes} vote{row.votes !== 1 ? 's' : ''}
+        </div>
+      </div>
+    ))
+  )}
+</div>
+              
+      <div
   style={{
     marginTop: 40,
     display: 'flex',
