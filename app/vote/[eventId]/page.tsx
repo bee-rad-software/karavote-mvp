@@ -38,6 +38,8 @@ export default function VotePage() {
   const [event, setEvent] = useState<EventRow | null>(null);
   const [current, setCurrent] = useState<PerformanceRow | null>(null);
   const [message, setMessage] = useState('');
+  const [categories, setCategories] = useState<VoteCategory[]>([]);
+const [scores, setScores] = useState<Record<string, number>>({});
 
   useEffect(() => {
     load();
