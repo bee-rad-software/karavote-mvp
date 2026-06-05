@@ -370,3 +370,4 @@ const upcoming = rotatedQueue
 
   </main>
 );
+}
