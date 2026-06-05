@@ -18,6 +18,11 @@ export default function DisplayPage() {
     ? `${window.location.origin}/vote/${eventId}`
     : '';
 
+  const peoplesChoiceUrl =
+  typeof window !== 'undefined'
+    ? `${window.location.origin}/peopleschoice/${eventId}`
+    : '';
+
 const signupUrl =
   typeof window !== 'undefined'
     ? `${window.location.origin}/signup/${eventId}`
