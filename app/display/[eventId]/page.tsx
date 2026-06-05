@@ -215,7 +215,7 @@ const upcoming = rotatedQueue
       <div style={{ marginTop: 8, fontSize: 20, fontWeight: 900 }}>VOTE</div>
     </div>
 
-<<div style={{ position: 'fixed', bottom: 24, left: '50%', transform: 'translateX(-50%)', textAlign: 'center' }}>
+<div style={{ position: 'fixed', bottom: 24, left: '50%', transform: 'translateX(-50%)', textAlign: 'center' }}>
   <div style={{ background: 'white', padding: 10, borderRadius: 14 }}>
     {peoplesChoiceUrl && <QRCodeSVG value={peoplesChoiceUrl} size={125} />}
   </div>
