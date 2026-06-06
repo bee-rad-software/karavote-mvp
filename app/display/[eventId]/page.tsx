@@ -188,15 +188,33 @@ const upcoming = rotatedQueue
 
     if (!singerScores.has(key)) {
       singerScores.set(key, {
-        singer_name: p.singer_name,
-        totalScore: 0,
-        totalVotes: 0,
-        performances: 0
-      });
+  singer_name: p.singer_name,
+  totalScore: 0,
+  totalVotes: 0,
+  performances: 0,
+  tiebreakerScore: 0
+});
     }
 
     const singer = singerScores.get(key)!;
     singer.totalScore += performanceAverage;
+    const tiebreakerCategory = categories.find(
+  (c) =>
+    c.category_name.trim().toLowerCase() ===
+    (event as any)?.tiebreaker_category_name?.trim().toLowerCase()
+);
+
+const tiebreakerVotes = pv.filter(
+  (v) => (v as any).category_id === tiebreakerCategory?.id
+);
+
+if (tiebreakerVotes.length > 0) {
+  const tiebreakerAverage =
+    tiebreakerVotes.reduce((sum, v) => sum + v.score, 0) /
+    tiebreakerVotes.length;
+
+  singer.tiebreakerScore += tiebreakerAverage;
+}
     singer.totalVotes += pv.length;
     singer.performances += 1;
   });
@@ -206,10 +224,18 @@ const upcoming = rotatedQueue
       ...s,
       averageScore: s.totalScore / s.performances
     }))
-    .sort((a, b) => b.averageScore - a.averageScore)
-    .slice(0, 5);
-}, [performances, votes]);
+    .sort((a, b) => {
+  const scoreDiff = b.averageScore - a.averageScore;
 
+  if (Math.abs(scoreDiff) > 0.001) {
+    return scoreDiff;
+  }
+
+  return (b.tiebreakerScore || 0) - (a.tiebreakerScore || 0);
+})
+    .slice(0, 5);
+}, [performances, votes, categories, event]);
+  
   if (event?.is_show_ended) {
   return (
     <main
