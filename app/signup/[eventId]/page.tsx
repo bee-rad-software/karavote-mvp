@@ -24,10 +24,10 @@ export default function SignupPage() {
 useEffect(() => {
   const savedName = localStorage.getItem('karavote_singer_name');
 
-  if (savedName) {
-    setSingerName(savedName);
-  }
-
+ if (savedName) {
+  setSingerName(savedName);
+  setSavedSingerName(savedName);
+}
   loadQueue();
 
   const channel = supabase
