@@ -13,6 +13,7 @@ export default function HomePage() {
   const [categories, setCategories] = useState<string[]>([
   'Overall Performance'
 ]);
+  const [tiebreakerCategory, setTiebreakerCategory] = useState('Overall Performance');
 
   async function createEvent() {
     setError('');
