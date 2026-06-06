@@ -319,21 +319,26 @@ if (tiebreakerVotes.length > 0) {
       overflow: 'hidden'
     }}
   >
-    <div style={{ position: 'fixed', bottom: 24, left: 24, textAlign: 'center' }}>
+    {event?.show_signup_qr && (
+<div style={{ position: 'fixed', bottom: 24, left: 24, textAlign: 'center' }}>
       <div style={{ background: 'white', padding: 10, borderRadius: 14 }}>
         {signupUrl && <QRCodeSVG value={signupUrl} size={125} />}
       </div>
       <div style={{ marginTop: 8, fontSize: 20, fontWeight: 900 }}>SIGN UP</div>
     </div>
+    )}
 
-    <div style={{ position: 'fixed', bottom: 24, right: 24, textAlign: 'center' }}>
+    {event?.show_voting_qr && (
+<div style={{ position: 'fixed', bottom: 24, right: 24, textAlign: 'center' }}>
       <div style={{ background: 'white', padding: 10, borderRadius: 14 }}>
         {voteUrl && <QRCodeSVG value={voteUrl} size={125} />}
       </div>
       <div style={{ marginTop: 8, fontSize: 20, fontWeight: 900 }}>VOTE</div>
     </div>
+    )}
 
-<div style={{ position: 'fixed', bottom: 24, left: '50%', transform: 'translateX(-50%)', textAlign: 'center' }}>
+{event?.show_peoples_choice_qr && (
+<div style={{ position: 'fixed', bottom: 24, left: '50%', transform: 'translateX(-50%)' }}>
   <div style={{ background: 'white', padding: 10, borderRadius: 14 }}>
     {peoplesChoiceUrl && <QRCodeSVG value={peoplesChoiceUrl} size={125} />}
   </div>
@@ -341,6 +346,7 @@ if (tiebreakerVotes.length > 0) {
     PEOPLE'S CHOICE
   </div>
 </div>
+  )}
     
     <header style={{ textAlign: 'center', marginBottom: 24 }}>
       <div style={{ fontSize: 26, letterSpacing: 5, color: '#facc15', fontWeight: 900 }}>
