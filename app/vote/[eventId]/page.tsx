@@ -168,6 +168,9 @@ async function submitCategoryVotes() {
 
   setMessage('Thanks. Your votes were counted.');
 }
+
+const completed = Object.keys(scores).length;
+const allCategoriesScored = completed === categories.length;
   
   return (
     <main className="container">
