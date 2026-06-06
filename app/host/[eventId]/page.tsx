@@ -521,7 +521,7 @@ if (tiebreakerVotes.length > 0) {
     return scoreDiff;
   }
 
-  return (b.tiebreakerScore || 0) - (a.tiebreakerScore || 0);
+  return (b.tiebreakerScore / b.performances || 0) - (a.tiebreakerScore / a.performances || 0);
 })
 }, [performances, votes]);
  
