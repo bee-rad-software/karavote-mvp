@@ -71,6 +71,23 @@ useEffect(() => {
     setSongs(songs.filter((_, i) => i !== index));
   }
 
+async function loadQueue() {
+  const { data, error } = await supabase
+    .from('performances')
+    .select('*')
+    .eq('event_id', eventId)
+    .neq('status', 'completed')
+    .neq('status', 'skipped')
+    .order('queue_order', { ascending: true });
+
+  if (error) {
+    console.error(error.message);
+    return;
+  }
+
+  setQueue(data || []);
+}
+  
   async function submitSignup() {
     setMessage('');
 
