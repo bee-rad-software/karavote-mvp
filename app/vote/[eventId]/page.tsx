@@ -182,7 +182,18 @@ async function submitCategoryVotes() {
             <p>Voting is <span className="badge">{event?.is_voting_open ? 'Open' : 'Closed'}</span></p>
 
             {categories.map((category) => (
-  <div key={category.id} className="card">
+<div
+  key={category.id}
+  className="card"
+  style={{
+    background: scores[category.id]
+      ? 'rgba(250,204,21,0.15)'
+      : undefined,
+    border: scores[category.id]
+      ? '2px solid #facc15'
+      : undefined
+  }}
+>
     <h3>{category.category_name}</h3>
 
     <div className="row">
