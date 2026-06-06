@@ -554,7 +554,7 @@ if (tiebreakerVotes.length > 0) {
 
   return (b.tiebreakerScore / b.performances || 0) - (a.tiebreakerScore / a.performances || 0);
 })
-}, [performances, votes]);
+}, [performances, votes, categories, event]);
  
   const singers = Array.from(
   new Set(
