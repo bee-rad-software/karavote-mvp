@@ -513,9 +513,11 @@ if (tiebreakerVotes.length > 0) {
       averageScore: s.totalScore / s.performances
     }))
    .sort((a, b) => {
-  if (b.averageScore !== a.averageScore) {
-    return b.averageScore - a.averageScore;
-  }
+ const scoreDiff = b.averageScore - a.averageScore;
+
+if (Math.abs(scoreDiff) > 0.001) {
+  return scoreDiff;
+}
 
   return (b.tiebreakerScore || 0) - (a.tiebreakerScore || 0);
 });
