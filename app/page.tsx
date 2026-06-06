@@ -105,6 +105,39 @@ setCreatedId(data.id);
       </option>
     ))}
 </select>
+
+        <h3>QR Code Options</h3>
+
+<label>
+  <input
+    type="checkbox"
+    checked={showSignupQR}
+    onChange={(e) => setShowSignupQR(e.target.checked)}
+  />
+  Show Signup QR
+</label>
+
+<label>
+  <input
+    type="checkbox"
+    checked={showVotingQR}
+    onChange={(e) => setShowVotingQR(e.target.checked)}
+  />
+  Show Voting QR
+</label>
+
+<label>
+  <input
+    type="checkbox"
+    checked={showPeoplesChoiceQR}
+    onChange={(e) => setShowPeoplesChoiceQR(e.target.checked)}
+  />
+  Show People's Choice QR
+</label>
+
+<button onClick={createEvent}>
+  Create Contest
+</button>
         
 <button
   className="secondary"
