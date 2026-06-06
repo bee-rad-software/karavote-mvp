@@ -57,12 +57,7 @@ useEffect(() => {
   setScores({});
   setMessage('');
 }, [current?.id]);
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'events', filter: `id=eq.${eventId}` }, load)
-      .subscribe();
-
-    return () => {
-      supabase.removeChannel(channel);
-    };
+     
   }, [eventId]);
 
   async function load() {
