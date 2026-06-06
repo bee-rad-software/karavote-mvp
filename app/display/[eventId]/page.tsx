@@ -48,7 +48,12 @@ const signupUrl =
   }, [eventId]);
 
   async function loadAll() {
-    await Promise.all([loadEvent(), loadPerformances(), loadVotes()]);
+    await Promise.all([
+  loadEvent(),
+  loadPerformances(),
+  loadVotes(),
+  loadPeoplesChoice()
+]);
   }
 
   async function loadEvent() {
