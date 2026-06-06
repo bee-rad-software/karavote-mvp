@@ -751,50 +751,41 @@ const singerGroups = activeQueue.reduce((groups, p) => {
 <div className="card">
   <h2>📱 QR Code Settings</h2>
 
-  <label style={{ display: 'block', marginBottom: 12 }}>
-    <input
-      type="checkbox"
-      checked={event?.show_signup_qr ?? true}
-      onChange={(e) =>
-        supabase
-          .from('events')
-          .update({ show_signup_qr: e.target.checked })
-          .eq('id', eventId)
-          .then(loadEvent)
-      }
-    />
-    {' '}Show Signup QR
-  </label>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+    <div>
+      <input
+        type="checkbox"
+        checked={(event as any)?.show_signup_qr ?? true}
+        onChange={(e) =>
+          toggleQrSetting('show_signup_qr', e.target.checked)
+        }
+      />
+      {' '}Show Signup QR
+    </div>
 
-  <label style={{ display: 'block', marginBottom: 12 }}>
-    <input
-      type="checkbox"
-      checked={event?.show_voting_qr ?? true}
-      onChange={(e) =>
-        supabase
-          .from('events')
-          .update({ show_voting_qr: e.target.checked })
-          .eq('id', eventId)
-          .then(loadEvent)
-      }
-    />
-    {' '}Show Voting QR
-  </label>
+    <div>
+      <input
+        type="checkbox"
+        checked={(event as any)?.show_voting_qr ?? true}
+        onChange={(e) =>
+          toggleQrSetting('show_voting_qr', e.target.checked)
+        }
+      />
+      {' '}Show Voting QR
+    </div>
 
-  <label style={{ display: 'block' }}>
-    <input
-      type="checkbox"
-      checked={event?.show_peoples_choice_qr ?? true}
-      onChange={(e) =>
-        supabase
-          .from('events')
-          .update({ show_peoples_choice_qr: e.target.checked })
-          .eq('id', eventId)
-          .then(loadEvent)
-      }
-    />
-    {' '}Show People's Choice QR
-  </label>
+    <div>
+      <input
+        type="checkbox"
+        checked={(event as any)?.show_peoples_choice_qr ?? true}
+        onChange={(e) =>
+          toggleQrSetting('show_peoples_choice_qr', e.target.checked)
+        }
+      />
+      {' '}Show People's Choice QR
+    </div>
+  </div>
+</div>
 </div>
 
 <div className="grid">
