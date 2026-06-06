@@ -184,6 +184,15 @@ const allCategoriesScored = completed === categories.length;
             <p>{current.song_title}{current.artist ? ` by ${current.artist}` : ''}</p>
             <p>Voting is <span className="badge">{event?.is_voting_open ? 'Open' : 'Closed'}</span></p>
 
+<p
+  style={{
+    fontWeight: 'bold',
+    color: '#38bdf8'
+  }}
+>
+  {completed} / {categories.length} Categories Scored
+</p>
+            
             {categories.map((category) => (
 <div
   key={category.id}
