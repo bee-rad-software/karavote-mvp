@@ -122,8 +122,9 @@ const [peoplesChoiceResults, setPeoplesChoiceResults] = useState<
 
 async function loadPeoplesChoice() {
   const { data, error } = await supabase
-    .from('peoples_choice_votes')
-    .select('singer_name');
+  .from('peoples_choice_votes')
+  .select('singer_name')
+  .eq('event_id', eventId);
 
   if (error) {
     console.error(error.message);
