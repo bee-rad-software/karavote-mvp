@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useParams } from 'next/navigation';
 
@@ -19,6 +19,14 @@ export default function SignupPage() {
   ]);
   const [message, setMessage] = useState('');
 
+useEffect(() => {
+  const savedName = localStorage.getItem('karavote_singer_name');
+
+  if (savedName) {
+    setSingerName(savedName);
+  }
+}, []);
+  
  function getDeviceId() {
   if (typeof window === 'undefined') return '';
 
