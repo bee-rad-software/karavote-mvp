@@ -148,6 +148,8 @@ const startingOrder = (existing?.length || 0) + 1;
     setMessage('You are signed up! Get ready to sing.');
   }
 
+  const twoAway = queue[2];
+
   return (
     <main className="container">
       <h1>Karaoke Signup</h1>
