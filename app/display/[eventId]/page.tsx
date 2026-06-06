@@ -71,6 +71,30 @@ const signupUrl =
     setVotes(data || []);
   }
 
+async function loadPeoplesChoice() {
+  const { data, error } = await supabase
+    .from('peoples_choice_votes')
+    .select('singer_name')
+    .eq('event_id', eventId);
+
+  if (error) {
+    console.error(error.message);
+    return;
+  }
+
+  const counts: Record<string, number> = {};
+
+  (data || []).forEach((vote) => {
+    counts[vote.singer_name] = (counts[vote.singer_name] || 0) + 1;
+  });
+
+  const results = Object.entries(counts)
+    .map(([singer_name, votes]) => ({ singer_name, votes }))
+    .sort((a, b) => b.votes - a.votes);
+
+  setPeoplesChoiceResults(results);
+}
+  
   const current = performances.find((p) => p.id === event?.current_performance_id);
 
  const rotatedQueue = useMemo(() => {
