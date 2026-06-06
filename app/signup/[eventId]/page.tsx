@@ -146,9 +146,10 @@ const startingOrder = (existing?.length || 0) + 1;
       return;
     }
 
-    setSingerName('');
-    setSongs([{ songTitle: '', artist: '' }]);
-    setMessage('You are signed up! Get ready to sing.');
+    setSingerName(singerName.trim());
+setSongs([{ songTitle: '', artist: '' }]);
+setMessage('You are signed up! Get ready to sing.');
+await loadQueue();
   }
 
 const myIndex = queue.findIndex(
