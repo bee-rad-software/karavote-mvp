@@ -489,6 +489,17 @@ const fairQueue = useMemo(() => {
     const singer = singerScores.get(key)!;
 
     singer.totalScore += performanceAverage;
+    const tiebreakerVotes = pv.filter((v) => {
+  const category = categories.find((c) => c.id === v.category_id);
+  return category?.category_name === event?.tiebreaker_category_name;
+});
+
+if (tiebreakerVotes.length > 0) {
+  const tiebreakerAverage =
+    tiebreakerVotes.reduce((sum, v) => sum + v.score, 0) / tiebreakerVotes.length;
+
+  singer.tiebreakerScore += tiebreakerAverage;
+}
     singer.totalVotes += pv.length;
     singer.performances += 1;
   });
@@ -498,7 +509,13 @@ const fairQueue = useMemo(() => {
       ...s,
       averageScore: s.totalScore / s.performances
     }))
-    .sort((a, b) => b.averageScore - a.averageScore);
+   .sort((a, b) => {
+  if (b.averageScore !== a.averageScore) {
+    return b.averageScore - a.averageScore;
+  }
+
+  return (b.tiebreakerScore || 0) - (a.tiebreakerScore || 0);
+});
 }, [performances, votes]);
  
   const singers = Array.from(
