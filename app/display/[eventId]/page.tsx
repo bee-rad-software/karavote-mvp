@@ -40,6 +40,16 @@ const signupUrl =
       .on('postgres_changes', { event: '*', schema: 'public', table: 'events', filter: `id=eq.${eventId}` }, loadEvent)
       .on('postgres_changes', { event: '*', schema: 'public', table: 'performances', filter: `event_id=eq.${eventId}` }, loadPerformances)
       .on('postgres_changes', { event: '*', schema: 'public', table: 'votes', filter: `event_id=eq.${eventId}` }, loadVotes)
+      .on(
+  'postgres_changes',
+  {
+    event: '*',
+    schema: 'public',
+    table: 'peoples_choice_votes',
+    filter: `event_id=eq.${eventId}`
+  },
+  loadPeoplesChoice
+)
       .subscribe();
 
     return () => {
