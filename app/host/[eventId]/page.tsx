@@ -785,7 +785,7 @@ const singerGroups = activeQueue.reduce((groups, p) => {
       {' '}Show People's Choice QR
     </div>
   </div>
-
+</div>
       <div className="grid">
        
 
