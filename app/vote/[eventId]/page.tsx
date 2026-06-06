@@ -57,8 +57,6 @@ useEffect(() => {
   setScores({});
   setMessage('');
 }, [current?.id]);
-     
-  }, [eventId]);
 
   async function load() {
     const { data: ev } = await supabase.from('events').select('*').eq('id', eventId).single();
