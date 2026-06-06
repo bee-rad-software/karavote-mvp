@@ -174,6 +174,7 @@ const upcoming = rotatedQueue
       totalScore: number;
       totalVotes: number;
       performances: number;
+      tiebreakerScore: number;
     }
   >();
 
