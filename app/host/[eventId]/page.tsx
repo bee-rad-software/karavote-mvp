@@ -744,9 +744,60 @@ const singerGroups = activeQueue.reduce((groups, p) => {
   }}
 >
   ➕ New Show
-</button>    
-  </div>
+747 </button>
+748 </div>
+749 </div>
+
+<div className="card">
+  <h2>📱 QR Code Settings</h2>
+
+  <label style={{ display: 'block', marginBottom: 12 }}>
+    <input
+      type="checkbox"
+      checked={event?.show_signup_qr ?? true}
+      onChange={(e) =>
+        supabase
+          .from('events')
+          .update({ show_signup_qr: e.target.checked })
+          .eq('id', eventId)
+          .then(loadEvent)
+      }
+    />
+    {' '}Show Signup QR
+  </label>
+
+  <label style={{ display: 'block', marginBottom: 12 }}>
+    <input
+      type="checkbox"
+      checked={event?.show_voting_qr ?? true}
+      onChange={(e) =>
+        supabase
+          .from('events')
+          .update({ show_voting_qr: e.target.checked })
+          .eq('id', eventId)
+          .then(loadEvent)
+      }
+    />
+    {' '}Show Voting QR
+  </label>
+
+  <label style={{ display: 'block' }}>
+    <input
+      type="checkbox"
+      checked={event?.show_peoples_choice_qr ?? true}
+      onChange={(e) =>
+        supabase
+          .from('events')
+          .update({ show_peoples_choice_qr: e.target.checked })
+          .eq('id', eventId)
+          .then(loadEvent)
+      }
+    />
+    {' '}Show People's Choice QR
+  </label>
 </div>
+
+<div className="grid">
       <div className="grid">
        
 
