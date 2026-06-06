@@ -103,6 +103,8 @@ localStorage.setItem(
   'karavote_singer_name',
   singerName.trim()
 );
+
+setSavedSingerName(singerName.trim());
     
     const deviceId = getDeviceId();
 
