@@ -492,12 +492,7 @@ const fairQueue = useMemo(() => {
     singer.totalScore += performanceAverage;
 
 
-if (tiebreakerVotes.length > 0) {
-  const tiebreakerAverage =
-    tiebreakerVotes.reduce((sum, v) => sum + v.score, 0) / tiebreakerVotes.length;
 
-  singer.tiebreakerScore += tiebreakerAverage;
-}
     singer.totalVotes += pv.length;
     singer.performances += 1;
   });
