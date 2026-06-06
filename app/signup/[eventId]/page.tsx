@@ -18,6 +18,7 @@ export default function SignupPage() {
     { songTitle: '', artist: '' }
   ]);
   const [message, setMessage] = useState('');
+  const [queue, setQueue] = useState<any[]>([]);
 
 useEffect(() => {
   const savedName = localStorage.getItem('karavote_singer_name');
