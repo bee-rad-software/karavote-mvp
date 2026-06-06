@@ -26,7 +26,10 @@ const [showPeoplesChoiceQR, setShowPeoplesChoiceQR] = useState(true);
   name,
   venue,
   host_pin: pin,
-  tiebreaker_category_name: tiebreakerCategory
+  tiebreaker_category_name: tiebreakerCategory,
+        show_signup_qr: showSignupQR,
+show_voting_qr: showVotingQR,
+show_peoples_choice_qr: showPeoplesChoiceQR
 })
       .select()
       .single();
