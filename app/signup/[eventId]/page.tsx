@@ -148,7 +148,19 @@ const startingOrder = (existing?.length || 0) + 1;
     setMessage('You are signed up! Get ready to sing.');
   }
 
-  const twoAway = queue[2];
+  const savedName =
+  typeof window !== 'undefined'
+    ? localStorage.getItem('karavote_singer_name')
+    : '';
+
+const myIndex = queue.findIndex(
+  (p) =>
+    savedName &&
+    p.singer_name.trim().toLowerCase() === savedName.trim().toLowerCase()
+);
+
+const myPosition = myIndex >= 0 ? myIndex + 1 : null;
+const twoAway = queue[2];
 
   return (
     <main className="container">
