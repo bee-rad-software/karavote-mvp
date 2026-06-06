@@ -19,7 +19,12 @@ export default function HomePage() {
     setError('');
     const { data, error } = await supabase
       .from('events')
-      .insert({ name, venue, host_pin: pin })
+      .insert({
+  name,
+  venue,
+  host_pin: pin,
+  tiebreaker_category_name: tiebreakerCategory
+})
       .select()
       .single();
 
