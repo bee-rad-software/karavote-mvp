@@ -53,12 +53,12 @@ const [peoplesChoiceResults, setPeoplesChoiceResults] = useState<
       .on(
         'postgres_changes',
         { event: '*', schema: 'public', table: 'performances', filter: `event_id=eq.${eventId}` },
-        loadPerformances
+        loadAll
       )
       .on(
         'postgres_changes',
         { event: '*', schema: 'public', table: 'votes', filter: `event_id=eq.${eventId}` },
-        loadVotes
+        loadAll
       )
       .on(
   'postgres_changes',
