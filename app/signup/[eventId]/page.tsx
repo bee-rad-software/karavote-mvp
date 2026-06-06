@@ -156,12 +156,6 @@ const startingOrder = (existing?.length || 0) + 1;
 
 const myIndex = queue.findIndex(
   (p) =>
-    savedName &&
-    p.singer_name.trim().toLowerCase() === savedName.trim().toLowerCase()
-);
-
-const myIndex = queue.findIndex(
-  (p) =>
     savedSingerName &&
     p.singer_name.trim().toLowerCase() === savedSingerName.trim().toLowerCase()
 );
