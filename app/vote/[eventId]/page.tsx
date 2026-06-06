@@ -42,13 +42,21 @@ export default function VotePage() {
 const [scores, setScores] = useState<Record<string, number>>({});
 
   useEffect(() => {
-    load();
+  load();
+
+  const channel = supabase.channel(`vote-${eventId}`)
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'events', filter: `id=eq.${eventId}` }, load)
+    .subscribe();
+
+  return () => {
+    supabase.removeChannel(channel);
+  };
+}, [eventId]);
+
 useEffect(() => {
   setScores({});
   setMessage('');
 }, [current?.id]);
-
-    const channel = supabase.channel(`vote-${eventId}`)
       .on('postgres_changes', { event: '*', schema: 'public', table: 'events', filter: `id=eq.${eventId}` }, load)
       .subscribe();
 
