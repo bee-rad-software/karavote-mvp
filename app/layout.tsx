@@ -1,10 +1,13 @@
 import './globals.css';
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'StageVotes',
-  description: 'Karaoke contest voting app'
-};
+  description: 'Live audience voting for karaoke contests',
+  icons: {
+    icon: '/stagevotes-logo.png',
+  },
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
