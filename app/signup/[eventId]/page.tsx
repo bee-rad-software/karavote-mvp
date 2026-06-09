@@ -199,11 +199,19 @@ const isOnDeckSinger =
 
 {currentSinger && (
   <div className="card">
-    <h3>🎤 Currently Singing</h3>
-    <p>{currentSinger.singer_name}</p>
+    {isCurrentSinger ? (
+      <>
+        <h2>🎤 You're Up Now!</h2>
+        <p>Head to the stage.</p>
+      </>
+    ) : (
+      <>
+        <h3>🎤 Currently Singing</h3>
+        <p>{currentSinger.singer_name}</p>
+      </>
+    )}
   </div>
 )}
-
 {onDeckSinger && (
   <div className="card">
     <h3>⏭ On Deck</h3>
