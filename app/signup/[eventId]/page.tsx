@@ -173,6 +173,18 @@ const estimatedWaitMinutes =
     : 0;
 const twoAway = queue[2];
 
+  const isCurrentSinger =
+  currentSinger &&
+  savedSingerName &&
+  currentSinger.singer_name.trim().toLowerCase() ===
+    savedSingerName.trim().toLowerCase();
+
+const isOnDeckSinger =
+  onDeckSinger &&
+  savedSingerName &&
+  onDeckSinger.singer_name.trim().toLowerCase() ===
+    savedSingerName.trim().toLowerCase();
+
   return (
     <main className="container">
      <div style={{ textAlign: 'center', marginBottom: 20 }}>
