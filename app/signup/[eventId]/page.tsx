@@ -185,6 +185,20 @@ const twoAway = queue[2];
   <h1>StageVotes Signup</h1>
 </div>
 
+{currentSinger && (
+  <div className="card">
+    <h3>🎤 Currently Singing</h3>
+    <p>{currentSinger.singer_name}</p>
+  </div>
+)}
+
+{onDeckSinger && (
+  <div className="card">
+    <h3>⏭ On Deck</h3>
+    <p>{onDeckSinger.singer_name}</p>
+  </div>
+)}
+      
 {myPosition && (
   <div className="card">
     <h2>
