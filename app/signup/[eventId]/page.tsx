@@ -182,6 +182,13 @@ const twoAway = queue[2];
 {myPosition && (
   <div className="card">
     <h2>
+      {myPosition === 1
+        ? "🎤 You're up now!"
+        : myPosition === 2
+        ? "⏭️ You're on deck!"
+        : myPosition === 3
+        ? "🔔 You're 2 songs away!"
+        : `🎶 You're #${myPosition} in line`}
       {myPosition > 1 && (
   <p className="small">
     ⏱ Estimated wait: about {estimatedWaitMinutes} minutes
