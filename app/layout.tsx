@@ -2,7 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'KaraVote',
+  title: 'StageVotes',
   description: 'Karaoke contest voting app'
 };
 
