@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { supabase, EventRow, PerformanceRow } from '@/lib/supabase';
 import { useParams } from 'next/navigation';
+import Image from 'next/image';
 
 function getDeviceId() {
   if (typeof window === 'undefined') return '';
@@ -99,7 +100,15 @@ export default function PeoplesChoicePage() {
 
   return (
     <main className="container">
-      <h1>People’s Choice</h1>
+     <div style={{ textAlign: 'center', marginBottom: 20 }}>
+  <Image
+    src="/stagevotes-logo.png"
+    alt="StageVotes"
+    width={250}
+    height={125}
+  />
+  <h1>StageVotes</h1>
+</div>
       <p className="small">{event?.name}</p>
 
       <div className="card">
