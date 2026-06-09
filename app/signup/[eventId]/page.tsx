@@ -282,10 +282,13 @@ const isOnDeckSinger =
             <h3>Song {index + 1}</h3>
 
             <label>Song title</label>
-            <input
-              value={song.songTitle}
-              onChange={(e) => updateSong(index, 'songTitle', e.target.value)}
-            />
+          <input
+  value={song.songTitle}
+  onChange={(e) => {
+    updateSong(index, 'songTitle', e.target.value);
+    searchSongs(e.target.value, index);
+  }}
+/>
 
             <label>Artist</label>
             <input
