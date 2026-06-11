@@ -43,6 +43,11 @@ const [peoplesChoiceResults, setPeoplesChoiceResults] = useState<
     ? `${window.location.origin}/peopleschoice/${eventId}`
     : '';
 
+  const checkinUrl =
+  typeof window !== 'undefined'
+    ? `${window.location.origin}/checkin/${eventId}`
+    : '';
+
   useEffect(() => {
     loadAll();
 
