@@ -26,6 +26,7 @@ const [onDeckSinger, setOnDeckSinger] = useState<any>(null);
   const [songSuggestions, setSongSuggestions] = useState<any[]>([]);
 const [activeSongIndex, setActiveSongIndex] = useState<number | null>(null);
   const [artistSuggestions, setArtistSuggestions] = useState<any[]>([]);
+ const [duplicateWarning, setDuplicateWarning] = useState('');
 
 useEffect(() => {
   const savedName = localStorage.getItem('karavote_singer_name');
