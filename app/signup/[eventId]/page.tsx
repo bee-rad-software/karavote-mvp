@@ -25,6 +25,7 @@ export default function SignupPage() {
 const [onDeckSinger, setOnDeckSinger] = useState<any>(null);
   const [songSuggestions, setSongSuggestions] = useState<any[]>([]);
 const [activeSongIndex, setActiveSongIndex] = useState<number | null>(null);
+  const [artistSuggestions, setArtistSuggestions] = useState<any[]>([]);
 
 useEffect(() => {
   const savedName = localStorage.getItem('karavote_singer_name');
@@ -114,6 +115,27 @@ async function searchSongs(searchText: string, songIndex: number) {
 
   setSongSuggestions(data || []);
   setActiveSongIndex(songIndex);
+}
+
+async function searchArtists(searchText: string) {
+  if (searchText.length < 2) {
+    setArtistSuggestions([]);
+    return;
+  }
+
+  const { data } = await supabase
+    .from('songs')
+    .select('artist')
+    .ilike('artist', `%${searchText}%`)
+    .limit(10);
+
+  const uniqueArtists = [
+    ...new Map(
+      (data || []).map(item => [item.artist, item])
+    ).values()
+  ];
+
+  setArtistSuggestions(uniqueArtists);
 }
   
   async function submitSignup() {
