@@ -371,6 +371,17 @@ checkDuplicateSong(e.target.value);
     ))}
   </div>
 )}
+
+{duplicateWarning && (
+  <p
+    style={{
+      color: '#fbbf24',
+      fontWeight: 'bold'
+    }}
+  >
+    {duplicateWarning}
+  </p>
+)}
             
             <label>Artist</label>
   <input
