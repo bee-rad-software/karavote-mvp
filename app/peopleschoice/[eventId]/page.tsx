@@ -65,6 +65,17 @@ export default function PeoplesChoicePage() {
     }
 
     const deviceId = getDeviceId();
+    const { data: checkin } = await supabase
+  .from('event_checkins')
+  .select('id')
+  .eq('event_id', eventId)
+  .eq('device_id', deviceId)
+  .maybeSingle();
+
+if (!checkin) {
+  setMessage('Please check in at the event before voting.');
+  return;
+}
 
     const { data: existingVote } = await supabase
       .from('peoples_choice_votes')
