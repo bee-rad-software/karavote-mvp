@@ -39,6 +39,16 @@ useEffect(() => {
 }
   loadQueue();
 
+if ('Notification' in window) {
+  setNotificationPermission(Notification.permission);
+
+  if (Notification.permission === 'default') {
+    Notification.requestPermission().then((permission) => {
+      setNotificationPermission(permission);
+    });
+  }
+}
+  
   const channel = supabase
     .channel(`signup-${eventId}`)
     .on(
