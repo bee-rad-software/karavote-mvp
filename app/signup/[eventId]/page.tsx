@@ -64,6 +64,32 @@ if ('Notification' in window) {
     supabase.removeChannel(channel);
   };
 }, [eventId]);
+
+useEffect(() => {
+  if (notificationPermission !== 'granted') return;
+
+  if (isOnDeckSinger && !notifiedOnDeck) {
+    new Notification('🎤 StageVotes', {
+      body: "You're on deck! Get ready to sing."
+    });
+
+    setNotifiedOnDeck(true);
+  }
+
+  if (isCurrentSinger && !notifiedCurrent) {
+    new Notification('🎤 StageVotes', {
+      body: "You're up now! Head to the stage."
+    });
+
+    setNotifiedCurrent(true);
+  }
+}, [
+  isOnDeckSinger,
+  isCurrentSinger,
+  notificationPermission,
+  notifiedOnDeck,
+  notifiedCurrent
+]);
   
  function getDeviceId() {
   if (typeof window === 'undefined') return '';
