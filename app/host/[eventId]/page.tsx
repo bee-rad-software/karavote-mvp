@@ -87,7 +87,8 @@ const [peoplesChoiceResults, setPeoplesChoiceResults] = useState<
   loadPerformances(),
   loadPeoplesChoice(),
   loadVotes(),
-  loadCategories()
+  loadCategories(),
+loadCheckins()
 ]);
   }
 
