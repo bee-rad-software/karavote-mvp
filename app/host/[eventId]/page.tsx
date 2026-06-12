@@ -973,13 +973,13 @@ const singerGroups = activeQueue.reduce((groups, p) => {
   </p>
 
   <p>
-    <strong>People’s Choice Votes:</strong> {peopleChoiceResults.reduce((sum, p) => sum + p.votes, 0)}
+    <strong>People’s Choice Votes:</strong> {peoplesChoiceResults.reduce((sum, p) => sum + p.votes, 0)}
   </p>
 
   <p>
     <strong>Participation:</strong>{' '}
     {checkinCount > 0
-      ? `${Math.round((peopleChoiceResults.reduce((sum, p) => sum + p.votes, 0) / checkinCount) * 100)}%`
+      ? `${Math.round((peoplesChoiceResults.reduce((sum, p) => sum + p.votes, 0) / checkinCount) * 100)}%`
       : '0%'}
   </p>
 </div>
