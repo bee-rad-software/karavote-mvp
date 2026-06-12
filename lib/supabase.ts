@@ -14,6 +14,10 @@ export type EventRow = {
   is_show_ended: boolean;
   current_performance_id: string | null;
   created_at: string;
+  venue_lat: number | null;
+venue_lng: number | null;
+checkin_radius_meters: number | null;
+checkin_required: boolean | null;
 };
 
 export type PerformanceRow = {
