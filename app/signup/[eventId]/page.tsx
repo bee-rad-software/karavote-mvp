@@ -263,6 +263,34 @@ const isOnDeckSinger =
   <h1>StageVotes Signup</h1>
 </div>
 
+{isCurrentSinger && (
+  <div
+    className="card"
+    style={{
+      background: 'rgba(194,65,12,0.25)',
+      border: '3px solid #c2410c',
+      textAlign: 'center'
+    }}
+  >
+    <h1>🎤 You're Up Now!</h1>
+    <p>Head to the stage.</p>
+  </div>
+)}
+
+{isOnDeckSinger && !isCurrentSinger && (
+  <div
+    className="card"
+    style={{
+      background: 'rgba(250,204,21,0.2)',
+      border: '3px solid #facc15',
+      textAlign: 'center'
+    }}
+  >
+    <h1>⏭ You're On Deck!</h1>
+    <p>Get ready to sing.</p>
+  </div>
+)}
+      
 {currentSinger && (
   <div className="card">
     {isCurrentSinger ? (
