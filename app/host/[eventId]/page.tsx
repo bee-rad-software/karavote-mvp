@@ -1111,65 +1111,65 @@ const singerGroups = activeQueue.reduce((groups, p) => {
     </div>
   ))
 ) : (
-  {activeQueue.map((p, index) => (
-    <div className="leaderboard-row" key={p.id}>
-      <div>
-        {editingId === p.id ? (
-  <div style={{ width: '100%' }}>
-    <label>Singer name</label>
-    <input
-      value={editSingerName}
-      onChange={(e) => setEditSingerName(e.target.value)}
-    />
-
-    <label>Song title</label>
-    <input
-      value={editSongTitle}
-      onChange={(e) => setEditSongTitle(e.target.value)}
-    />
-
-    <label>Artist</label>
-    <input
-      value={editArtist}
-      onChange={(e) => setEditArtist(e.target.value)}
-    />
-  </div>
-) : (
-  <div>
-    <strong>
-      #{index + 1} {p.singer_name} (Song #{p.songNumber})
-    </strong>
-
-    <div className="small">
-      {p.song_title}
-      {p.artist ? ` by ${p.artist}` : ''}
-    </div>
-  </div>
-)}
-      </div>
-
-      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-       {editingId === p.id ? (
   <>
-    <button onClick={() => saveEdit(p.id)}>Save</button>
-    <button onClick={cancelEditing}>Cancel</button>
-  </>
-) : (
-  <>
-    <button onClick={() => setCurrent(p.id)}>Make Current</button>
-    <button onClick={() => moveSinger(p.id, 'up')}>↑ Up</button>
-    <button onClick={() => moveSinger(p.id, 'down')}>↓ Down</button>
-    <button onClick={() => skipSinger(p.id)}>Skip</button>
-    <button onClick={() => removeSinger(p.id)}>Remove</button>
-    <button onClick={() => startEditing(p)}>Edit</button>
-  </>
-)}
-      </div>
-    </div>
-  ))
-)}
+    {activeQueue.map((p, index) => (
+      <div className="leaderboard-row" key={p.id}>
+        <div>
+          {editingId === p.id ? (
+            <div style={{ width: '100%' }}>
+              <label>Singer name</label>
+              <input
+                value={editSingerName}
+                onChange={(e) => setEditSingerName(e.target.value)}
+              />
+
+              <label>Song title</label>
+              <input
+                value={editSongTitle}
+                onChange={(e) => setEditSongTitle(e.target.value)}
+              />
+
+              <label>Artist</label>
+              <input
+                value={editArtist}
+                onChange={(e) => setEditArtist(e.target.value)}
+              />
+            </div>
+          ) : (
+            <div>
+              <strong>
+                #{index + 1} {p.singer_name} (Song #{p.songNumber})
+              </strong>
+
+              <div className="small">
+                {p.song_title}
+                {p.artist ? ` by ${p.artist}` : ''}
+              </div>
+            </div>
+          )}
         </div>
-        
+
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          {editingId === p.id ? (
+            <>
+              <button onClick={() => saveEdit(p.id)}>Save</button>
+              <button onClick={cancelEditing}>Cancel</button>
+            </>
+          ) : (
+            <>
+              <button onClick={() => setCurrent(p.id)}>Make Current</button>
+              <button onClick={() => moveSinger(p.id, 'up')}>↑ Up</button>
+              <button onClick={() => moveSinger(p.id, 'down')}>↓ Down</button>
+              <button onClick={() => skipSinger(p.id)}>Skip</button>
+              <button onClick={() => removeSinger(p.id)}>Remove</button>
+              <button onClick={() => startEditing(p)}>Edit</button>
+            </>
+          )}
+        </div>
+      </div>
+    ))}
+  </>
+)}
   <div className="card">
   <h2 style={{ color: '#38bdf8' }}>✅ Completed Tonight</h2>
 
