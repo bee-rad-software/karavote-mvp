@@ -916,6 +916,34 @@ const singerGroups = activeQueue.reduce((groups, p) => {
   </div>
 </div>
 
+<div className="card">
+  <h2>📍 Check-In Settings</h2>
+
+  <label style={{ display: 'block', marginBottom: 12 }}>
+    <input
+      type="checkbox"
+      checked={event?.checkin_required ?? false}
+      onChange={(e) => toggleCheckinRequired(e.target.checked)}
+    />
+    {' '}Require check-in before People&apos;s Choice voting
+  </label>
+
+  <button className="secondary" onClick={useCurrentLocationForCheckin}>
+    Use My Current Location
+  </button>
+
+  <p className="small">
+    Current venue location:{' '}
+    {event?.venue_lat && event?.venue_lng
+      ? `${event.venue_lat.toFixed(5)}, ${event.venue_lng.toFixed(5)}`
+      : 'Not set'}
+  </p>
+
+  <p className="small">
+    Check-in radius: {event?.checkin_radius_meters || 150} meters
+  </p>
+</div>
+      
 <div className="grid">
        
 
