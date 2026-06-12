@@ -91,6 +91,20 @@ const [peoplesChoiceResults, setPeoplesChoiceResults] = useState<
 ]);
   }
 
+async function loadCheckins() {
+  const { count, error } = await supabase
+    .from('event_checkins')
+    .select('*', { count: 'exact', head: true })
+    .eq('event_id', eventId);
+
+  if (error) {
+    console.error(error.message);
+    return;
+  }
+
+  setCheckinCount(count || 0);
+}
+  
 async function copyLink(label: string, url: string) {
   await navigator.clipboard.writeText(url);
   alert(`${label} link copied!`);
