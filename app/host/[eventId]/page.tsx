@@ -27,6 +27,7 @@ const [peoplesChoiceResults, setPeoplesChoiceResults] = useState<
   const [categories, setCategories] = useState<
   { id: string; category_name: string }[]
 >([]);
+  const [checkinCount, setCheckinCount] = useState(0);
   
   const voteUrl =
     typeof window !== 'undefined'
