@@ -3,11 +3,18 @@ import type { Metadata } from 'next';
 
 export const metadata = {
   title: 'StageVotes',
-  description: 'Live audience voting for karaoke contests',
+  description: 'Live karaoke voting and queue management',
+  manifest: '/manifest.json',
   icons: {
-    icon: '/stagevotes-logo.png',
+    icon: '/icon.jpg',
+    apple: '/icon.jpg'
   },
-}
+  appleWebApp: {
+    capable: true,
+    title: 'StageVotes',
+    statusBarStyle: 'black-translucent'
+  }
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
