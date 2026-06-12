@@ -322,7 +322,7 @@ const isOnDeckSinger =
   </div>
 )}
       
-{myPosition && (
+{myPosition && !isCurrentSinger && !isOnDeckSinger && (
   <div className="card">
     <h2>
       {myPosition === 1
