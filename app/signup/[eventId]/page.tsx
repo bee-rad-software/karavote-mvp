@@ -29,6 +29,8 @@ const [activeSongIndex, setActiveSongIndex] = useState<number | null>(null);
  const [duplicateWarning, setDuplicateWarning] = useState('');
   const [notificationPermission, setNotificationPermission] =
   useState<NotificationPermission | null>(null);
+  const [notifiedOnDeck, setNotifiedOnDeck] = useState(false);
+const [notifiedCurrent, setNotifiedCurrent] = useState(false);
 
 useEffect(() => {
   const savedName = localStorage.getItem('karavote_singer_name');
