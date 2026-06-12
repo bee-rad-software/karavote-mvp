@@ -89,6 +89,20 @@ if (!checkin) {
       return;
     }
 
+if (event?.checkin_required) {
+  const { data: checkin } = await supabase
+    .from('event_checkins')
+    .select('id')
+    .eq('event_id', eventId)
+    .eq('device_id', deviceId)
+    .maybeSingle();
+
+  if (!checkin) {
+    setMessage('Please check in at the event before voting.');
+    return;
+  }
+}
+    
     const { error } = await supabase
       .from('peoples_choice_votes')
       .insert({
