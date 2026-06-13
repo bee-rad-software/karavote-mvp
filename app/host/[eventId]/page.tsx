@@ -1149,7 +1149,9 @@ const singerGroups = activeQueue.reduce((groups, p) => {
   ))
 ) : (
   <>
-    {activeQueue.map((p, index) => (
+    {rotatedQueue
+  .filter((p) => p.status !== 'completed' && p.status !== 'skipped')
+  .map((p, index) => (
       <div className="leaderboard-row" key={p.id}>
         <div>
           {editingId === p.id ? (
