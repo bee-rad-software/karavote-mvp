@@ -290,7 +290,6 @@ const maxOrderInCurrentRound =
     .reduce((max, p: any) => Math.max(max, p.queue_order || 0), 0);
 
 const nextOrder = maxOrderInCurrentRound + 1;
-const nextOrder = maxQueueOrder + 1;
 
     const { error } = await supabase.from('performances').insert({
   event_id: eventId,
