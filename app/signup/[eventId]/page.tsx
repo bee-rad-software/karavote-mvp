@@ -255,8 +255,12 @@ const { data: existing } = await supabase
   .from('performances')
   .select('*')
   .eq('event_id', eventId);
+const maxQueueOrder =
+  existing && existing.length > 0
+    ? Math.max(...existing.map((p: any) => p.queue_order || 0))
+    : 0;
 
-const startingOrder = (existing?.length || 0) + 1;
+const startingOrder = maxQueueOrder + 1;
 
     const rows = validSongs.map((song, index) => ({
   event_id: eventId,
