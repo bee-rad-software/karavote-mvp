@@ -696,6 +696,10 @@ if (tiebreakerVotes.length > 0) {
   (p) => p.status !== 'completed' && p.status !== 'skipped'
 );
 const twoAway = activeQueue[2];
+
+const judgeBallotCount = new Set(
+  votes.map((v: any) => `${v.performance_id}-${v.device_id}`)
+).size;
   
 const singerGroups = activeQueue.reduce((groups, p) => {
   const singer = p.singer_name.trim();
@@ -772,10 +776,10 @@ const singerGroups = activeQueue.reduce((groups, p) => {
   </div>
 
   <div className="card">
-    <h3 style={{ color: '#38bdf8', marginTop: 0 }}>⭐ Votes</h3>
-    <div style={{ fontSize: 36, fontWeight: 900 }}>
-      {votes.length}
-    </div>
+   <h3 style={{ color: '#38bdf8', marginTop: 0 }}>🧑‍⚖️ Judge Ballots</h3>
+<div style={{ fontSize: 36, fontWeight: 900 }}>
+  {judgeBallotCount}
+</div>
   </div>
 
   <div className="card">
