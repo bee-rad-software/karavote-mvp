@@ -65,16 +65,24 @@ export default function PeoplesChoicePage() {
     }
 
     const deviceId = getDeviceId();
-    const { data: checkin } = await supabase
-  .from('event_checkins')
-  .select('id')
-  .eq('event_id', eventId)
-  .eq('device_id', deviceId)
-  .maybeSingle();
+    const { data: eventSettings } = await supabase
+  .from('events')
+  .select('checkin_required')
+  .eq('id', eventId)
+  .single();
 
-if (!checkin) {
-  setMessage('Please check in at the event before voting.');
-  return;
+if (eventSettings?.checkin_required === true) {
+  const { data: checkin } = await supabase
+    .from('event_checkins')
+    .select('id')
+    .eq('event_id', eventId)
+    .eq('device_id', deviceId)
+    .maybeSingle();
+
+  if (!checkin) {
+    setMessage('Please check in at the event before voting.');
+    return;
+  }
 }
 
     const { data: existingVote } = await supabase
