@@ -710,9 +710,9 @@ if (tiebreakerVotes.length > 0) {
   )
 );
   
-  const activeQueue = rotatedQueue.filter(
-  (p) => p.status !== 'completed' && p.status !== 'skipped'
-);
+  const activeQueue = performances
+  .filter((p) => p.status !== 'completed' && p.status !== 'skipped')
+  .sort((a, b) => a.queue_order - b.queue_order);
 const twoAway = activeQueue[2];
 
 const judgeBallotCount = new Set(
