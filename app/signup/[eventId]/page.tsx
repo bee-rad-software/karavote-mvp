@@ -255,19 +255,37 @@ const { data: existing } = await supabase
   .from('performances')
   .select('*')
   .eq('event_id', eventId);
+
+const activePerformances =
+  existing?.filter(
+    (p: any) =>
+      p.status !== 'completed' &&
+      p.status !== 'skipped'
+  ) || [];
+
+const activeRound =
+  activePerformances.length > 0
+    ? Math.min(
+        ...activePerformances.map((p: any) => p.round || 1)
+      )
+    : 1;
+
 const maxQueueOrder =
   existing && existing.length > 0
-    ? Math.max(...existing.map((p: any) => p.queue_order || 0))
+    ? Math.max(
+        ...existing.map((p: any) => p.queue_order || 0)
+      )
     : 0;
 
 const startingOrder = maxQueueOrder + 1;
-
-    const rows = validSongs.map((song, index) => ({
+    
+   const rows = validSongs.map((song, index) => ({
   event_id: eventId,
   singer_name: singerName.trim(),
   song_title: song.songTitle.trim(),
   artist: song.artist.trim(),
   queue_order: startingOrder + index,
+  round: activeRound + index,
   device_id: deviceId
 }));
 
