@@ -294,7 +294,7 @@ const nextOrder = maxQueueOrder + 1;
       singer_name: singerName.trim(),
       song_title: songTitle.trim(),
       artist: artist.trim(),
-      queue_order: nextOrder
+      queue_order: nextOrder,
       round: getCurrentActiveRound()
     });
 
