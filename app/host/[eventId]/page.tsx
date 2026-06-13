@@ -286,7 +286,12 @@ const currentRound = getCurrentActiveRound();
 
 const maxOrderInCurrentRound =
   performances
-    .filter((p: any) => (p.round || 1) === currentRound)
+    .filter(
+      (p: any) =>
+        (p.round || 1) === currentRound &&
+        p.status !== 'completed' &&
+        p.status !== 'skipped'
+    )
     .reduce((max, p: any) => Math.max(max, p.queue_order || 0), 0);
 
 const nextOrder = maxOrderInCurrentRound + 1;
