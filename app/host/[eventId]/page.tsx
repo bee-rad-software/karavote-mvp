@@ -897,6 +897,158 @@ const singerGroups = activeQueue.reduce((groups, p) => {
             <p>No current singer selected.</p>
           )}
         </div>
+
+ <div className="card">
+        <h2 style={{ color: '#38bdf8' }}>
+  📋 Queue
+</h2>
+        <div style={{ marginBottom: 12 }}>
+  <button onClick={() => setSingerView(!singerView)}>
+    {singerView ? 'Normal View' : 'Singer View'}
+  </button>
+</div>
+        
+     {singerView ? (
+  Object.entries(singerGroups).map(([singer, songs]) => (
+    <div className="leaderboard-row" key={singer}>
+      <div style={{ width: '100%' }}>
+        <strong style={{ color: '#38bdf8', fontSize: 22 }}>
+  {singer} ({(songs as PerformanceRow[]).length} song
+  {(songs as PerformanceRow[]).length !== 1 ? 's' : ''})
+</strong>
+
+        {(songs as PerformanceRow[]).map((p) => (
+          <div
+            key={p.id}
+            style={{
+              marginTop: 10,
+              paddingLeft: 14,
+              borderLeft: '3px solid #c2410c'
+            }}
+          >
+            <div className="small">
+              {p.song_title}
+              {p.artist ? ` by ${p.artist}` : ''}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  ))
+) : (
+  <>
+    {rotatedQueue
+  .filter((p) => p.status !== 'completed' && p.status !== 'skipped')
+  .map((p, index) => (
+  <div
+  className="queue-row"
+  key={p.id}
+  style={{
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '16px',
+    borderBottom: '1px solid rgba(255,255,255,0.08)'
+  }}
+>
+        <div>
+          {editingId === p.id ? (
+            <div style={{ width: '100%' }}>
+              <label>Singer name</label>
+              <input
+                value={editSingerName}
+                onChange={(e) => setEditSingerName(e.target.value)}
+              />
+
+              <label>Song title</label>
+              <input
+                value={editSongTitle}
+                onChange={(e) => setEditSongTitle(e.target.value)}
+              />
+
+              <label>Artist</label>
+              <input
+                value={editArtist}
+                onChange={(e) => setEditArtist(e.target.value)}
+              />
+            </div>
+          ) : (
+         <div style={{ flex: 1 }}>
+              <strong style={{ fontSize: 18 }}>
+              #{index + 1} {p.singer_name} (Queue #{p.queue_order})
+              </strong>
+
+              <div className="small">
+                {p.song_title}
+                {p.artist ? ` by ${p.artist}` : ''}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div
+  style={{
+    display: 'flex',
+    gap: 6,
+    alignItems: 'center'
+  }}
+>
+          {editingId === p.id ? (
+            <>
+              <button onClick={() => saveEdit(p.id)}>Save</button>
+              <button onClick={cancelEditing}>Cancel</button>
+            </>
+          ) : (
+            <>
+           <button
+  className="btn-small primary"
+  onClick={() => setCurrent(p.id)}
+>
+  ▶
+</button>
+
+<button
+  className="btn-small"
+  onClick={() => moveSinger(p.id, 'up')}
+>
+  ↑
+</button>
+
+<button
+  className="btn-small"
+  onClick={() => moveSinger(p.id, 'down')}
+>
+  ↓
+</button>
+
+<button
+  className="btn-small warning"
+  onClick={() => skipSinger(p.id)}
+>
+  Skip
+</button>
+
+<button
+  className="btn-small danger"
+  onClick={() => removeSinger(p.id)}
+>
+  ✕
+</button>
+
+<button
+  className="btn-small"
+  onClick={() => startEditing(p)}
+>
+  Edit
+</button>
+            </>
+          )}
+        </div>
+      </div>
+    ))}
+  </>
+)}
+</div>
       
       <div className="card">
   <h2 style={{ color: '#38bdf8' }}>⚡ Quick Actions</h2>
@@ -1114,158 +1266,6 @@ const singerGroups = activeQueue.reduce((groups, p) => {
 
         <button onClick={addPerformance}>Add to Queue</button>
       </div>
-
-      <div className="card">
-        <h2 style={{ color: '#38bdf8' }}>
-  📋 Queue
-</h2>
-        <div style={{ marginBottom: 12 }}>
-  <button onClick={() => setSingerView(!singerView)}>
-    {singerView ? 'Normal View' : 'Singer View'}
-  </button>
-</div>
-        
-     {singerView ? (
-  Object.entries(singerGroups).map(([singer, songs]) => (
-    <div className="leaderboard-row" key={singer}>
-      <div style={{ width: '100%' }}>
-        <strong style={{ color: '#38bdf8', fontSize: 22 }}>
-  {singer} ({(songs as PerformanceRow[]).length} song
-  {(songs as PerformanceRow[]).length !== 1 ? 's' : ''})
-</strong>
-
-        {(songs as PerformanceRow[]).map((p) => (
-          <div
-            key={p.id}
-            style={{
-              marginTop: 10,
-              paddingLeft: 14,
-              borderLeft: '3px solid #c2410c'
-            }}
-          >
-            <div className="small">
-              {p.song_title}
-              {p.artist ? ` by ${p.artist}` : ''}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  ))
-) : (
-  <>
-    {rotatedQueue
-  .filter((p) => p.status !== 'completed' && p.status !== 'skipped')
-  .map((p, index) => (
-  <div
-  className="queue-row"
-  key={p.id}
-  style={{
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: '16px',
-    borderBottom: '1px solid rgba(255,255,255,0.08)'
-  }}
->
-        <div>
-          {editingId === p.id ? (
-            <div style={{ width: '100%' }}>
-              <label>Singer name</label>
-              <input
-                value={editSingerName}
-                onChange={(e) => setEditSingerName(e.target.value)}
-              />
-
-              <label>Song title</label>
-              <input
-                value={editSongTitle}
-                onChange={(e) => setEditSongTitle(e.target.value)}
-              />
-
-              <label>Artist</label>
-              <input
-                value={editArtist}
-                onChange={(e) => setEditArtist(e.target.value)}
-              />
-            </div>
-          ) : (
-         <div style={{ flex: 1 }}>
-              <strong style={{ fontSize: 18 }}>
-              #{index + 1} {p.singer_name} (Queue #{p.queue_order})
-              </strong>
-
-              <div className="small">
-                {p.song_title}
-                {p.artist ? ` by ${p.artist}` : ''}
-              </div>
-            </div>
-          )}
-        </div>
-
-        <div
-  style={{
-    display: 'flex',
-    gap: 6,
-    alignItems: 'center'
-  }}
->
-          {editingId === p.id ? (
-            <>
-              <button onClick={() => saveEdit(p.id)}>Save</button>
-              <button onClick={cancelEditing}>Cancel</button>
-            </>
-          ) : (
-            <>
-           <button
-  className="btn-small primary"
-  onClick={() => setCurrent(p.id)}
->
-  ▶
-</button>
-
-<button
-  className="btn-small"
-  onClick={() => moveSinger(p.id, 'up')}
->
-  ↑
-</button>
-
-<button
-  className="btn-small"
-  onClick={() => moveSinger(p.id, 'down')}
->
-  ↓
-</button>
-
-<button
-  className="btn-small warning"
-  onClick={() => skipSinger(p.id)}
->
-  Skip
-</button>
-
-<button
-  className="btn-small danger"
-  onClick={() => removeSinger(p.id)}
->
-  ✕
-</button>
-
-<button
-  className="btn-small"
-  onClick={() => startEditing(p)}
->
-  Edit
-</button>
-            </>
-          )}
-        </div>
-      </div>
-    ))}
-  </>
-)}
-</div>
 
 <div className="card">
   <h2 style={{ color: '#38bdf8' }}>✅ Completed Tonight</h2>
