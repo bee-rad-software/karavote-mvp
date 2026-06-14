@@ -83,3 +83,27 @@ button.danger {
   height: 56px;
   font-size: 22px;
 }
+.btn-small {
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 800;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.08);
+  color: white;
+}
+
+.btn-small.primary {
+  background: #38bdf8;
+  color: #031018;
+}
+
+.btn-small.warning {
+  background: #facc15;
+  color: #1f1300;
+}
+
+.btn-small.danger {
+  background: #ef4444;
+  color: white;
+}
