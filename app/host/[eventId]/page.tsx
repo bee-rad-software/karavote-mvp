@@ -284,25 +284,37 @@ function getCurrentActiveRound() {
     }
 const currentRound = getCurrentActiveRound();
 
-const maxOrderInCurrentRound =
+const singerKey = singerName.trim().toLowerCase();
+
+const singerExistingSongs = performances.filter(
+  (p: any) =>
+    p.singer_name.trim().toLowerCase() === singerKey &&
+    p.status !== 'skipped'
+);
+
+const singerNextRound = singerExistingSongs.length + 1;
+
+const assignedRound = Math.max(currentRound, singerNextRound);
+
+const maxOrderInAssignedRound =
   performances
     .filter(
       (p: any) =>
-        (p.round || 1) === currentRound &&
+        (p.round || 1) === assignedRound &&
         p.status !== 'completed' &&
         p.status !== 'skipped'
     )
     .reduce((max, p: any) => Math.max(max, p.queue_order || 0), 0);
 
-const nextOrder = maxOrderInCurrentRound + 1;
+const nextOrder = maxOrderInAssignedRound + 1;
 
-    const { error } = await supabase.from('performances').insert({
+const { error } = await supabase.from('performances').insert({
   event_id: eventId,
   singer_name: singerName.trim(),
   song_title: songTitle.trim(),
   artist: artist.trim(),
   queue_order: nextOrder,
-  round: currentRound
+  round: assignedRound
 });
 
     if (error) {
