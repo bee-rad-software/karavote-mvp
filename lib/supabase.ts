@@ -18,6 +18,9 @@ export type EventRow = {
 venue_lng: number | null;
 checkin_radius_meters: number | null;
 checkin_required: boolean | null;
+  show_signup_qr?: boolean;
+show_voting_qr?: boolean;
+show_peoples_choice_qr?: boolean;
 };
 
 export type PerformanceRow = {
