@@ -1147,7 +1147,7 @@ const singerGroups = activeQueue.reduce((groups, p) => {
     <div>
       <h3>Signup</h3>
       <button onClick={() => navigator.clipboard.writeText(signupUrl)}>Copy Link</button>
-      <button onClick={() => downloadQr(signupUrl, 'signup-qr.png')}>Download QR</button>
+      <button onClick={() => downloadQR(signupUrl, 'signup-qr.png')}>Download QR</button>
     </div>
 
     <div>
