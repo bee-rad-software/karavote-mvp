@@ -296,6 +296,11 @@ const singerNextRound = singerExistingSongs.length + 1;
 
 const assignedRound = Math.max(currentRound, singerNextRound);
 
+const singerOriginalOrder =
+  singerExistingSongs.length > 0
+    ? Math.min(...singerExistingSongs.map((p: any) => p.queue_order || 0))
+    : null;
+
 const maxOrderInAssignedRound =
   performances
     .filter(
@@ -306,7 +311,10 @@ const maxOrderInAssignedRound =
     )
     .reduce((max, p: any) => Math.max(max, p.queue_order || 0), 0);
 
-const nextOrder = maxOrderInAssignedRound + 1;
+const nextOrder =
+  singerOriginalOrder !== null
+    ? singerOriginalOrder
+    : maxOrderInAssignedRound + 1;
 
 const { error } = await supabase.from('performances').insert({
   event_id: eventId,
