@@ -897,7 +897,6 @@ const singerGroups = activeQueue.reduce((groups, p) => {
             <p>No current singer selected.</p>
           )}
         </div>
-      </div>
       
       <div className="card">
   <h2 style={{ color: '#38bdf8' }}>⚡ Quick Actions</h2>
@@ -1098,7 +1097,7 @@ const singerGroups = activeQueue.reduce((groups, p) => {
 </div>
       
 <div className="grid">
-       
+             </div>
 
       <div className="card">
         <h2 style={{ color: '#38bdf8' }}>
