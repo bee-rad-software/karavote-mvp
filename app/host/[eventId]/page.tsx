@@ -828,7 +828,78 @@ const singerGroups = activeQueue.reduce((groups, p) => {
   </div>
 </div>
      </div>
-     <div className="card">
+   
+<div className="card">
+          <h2
+  style={{
+    color: '#c2410c',
+    fontSize: 32,
+    marginBottom: 16
+  }}
+>
+  🎙 NOW SINGING
+</h2>
+          {current ? (
+            <>
+              <h3
+  style={{
+    fontSize: 48,
+    color: '#38bdf8',
+    marginBottom: 8
+  }}
+>
+  {current.singer_name}
+</h3>
+              <p>
+                {current.song_title}
+                {current.artist ? ` by ${current.artist}` : ''}
+              </p>
+              <p>
+                Voting:{' '}
+                <span className="badge">
+                  {event?.is_voting_open ? 'Open' : 'Closed'}
+                </span>
+              </p>
+              <div
+  style={{
+    marginTop: 24,
+    padding: 18,
+    borderRadius: 16,
+    background: 'rgba(56,189,248,0.12)',
+    border: '1px solid rgba(56,189,248,0.35)'
+  }}
+>
+  <h3 style={{ color: '#38bdf8', marginTop: 0 }}>⏭ Up Next</h3>
+
+  {upNext ? (
+    <>
+      <div style={{ fontSize: 28, fontWeight: 900 }}>
+        {upNext.singer_name}
+      </div>
+      <div className="small">
+        {upNext.song_title}
+        {upNext.artist ? ` by ${upNext.artist}` : ''}
+      </div>
+    </>
+  ) : (
+    <p>No one waiting.</p>
+  )}
+</div>
+              <div className="row">
+              <button onClick={nextSinger}>Next Singer</button>
+                <button onClick={() => toggleVoting(true)}>Open Voting</button>
+                <button className="danger" onClick={() => toggleVoting(false)}>
+                  Close Voting
+                </button>
+              </div>
+            </>
+          ) : (
+            <p>No current singer selected.</p>
+          )}
+        </div>
+      </div>
+      
+      <div className="card">
   <h2 style={{ color: '#38bdf8' }}>⚡ Quick Actions</h2>
 
   <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
@@ -1028,76 +1099,6 @@ const singerGroups = activeQueue.reduce((groups, p) => {
       
 <div className="grid">
        
-
-        <div className="card">
-          <h2
-  style={{
-    color: '#c2410c',
-    fontSize: 32,
-    marginBottom: 16
-  }}
->
-  🎙 NOW SINGING
-</h2>
-          {current ? (
-            <>
-              <h3
-  style={{
-    fontSize: 48,
-    color: '#38bdf8',
-    marginBottom: 8
-  }}
->
-  {current.singer_name}
-</h3>
-              <p>
-                {current.song_title}
-                {current.artist ? ` by ${current.artist}` : ''}
-              </p>
-              <p>
-                Voting:{' '}
-                <span className="badge">
-                  {event?.is_voting_open ? 'Open' : 'Closed'}
-                </span>
-              </p>
-              <div
-  style={{
-    marginTop: 24,
-    padding: 18,
-    borderRadius: 16,
-    background: 'rgba(56,189,248,0.12)',
-    border: '1px solid rgba(56,189,248,0.35)'
-  }}
->
-  <h3 style={{ color: '#38bdf8', marginTop: 0 }}>⏭ Up Next</h3>
-
-  {upNext ? (
-    <>
-      <div style={{ fontSize: 28, fontWeight: 900 }}>
-        {upNext.singer_name}
-      </div>
-      <div className="small">
-        {upNext.song_title}
-        {upNext.artist ? ` by ${upNext.artist}` : ''}
-      </div>
-    </>
-  ) : (
-    <p>No one waiting.</p>
-  )}
-</div>
-              <div className="row">
-              <button onClick={nextSinger}>Next Singer</button>
-                <button onClick={() => toggleVoting(true)}>Open Voting</button>
-                <button className="danger" onClick={() => toggleVoting(false)}>
-                  Close Voting
-                </button>
-              </div>
-            </>
-          ) : (
-            <p>No current singer selected.</p>
-          )}
-        </div>
-      </div>
 
       <div className="card">
         <h2 style={{ color: '#38bdf8' }}>
